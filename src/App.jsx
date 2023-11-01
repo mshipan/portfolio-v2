@@ -13,11 +13,11 @@ function App() {
     } else {
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 1000);
     }
   }, [isFirstVisit]);
   return (
-    <div>
+    <div className="bg-[#02050a]">
       {isLoading ? (
         <Loader />
       ) : (

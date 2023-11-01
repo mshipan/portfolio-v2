@@ -1,0 +1,19 @@
+li {
+  position: relative;
+  cursor: pointer;
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px; /* Adjust the height as needed */
+  background-color: #55e6a5; /* The color of the underline */
+  transition: all 0.3s;
+}
+
+li:hover::before {
+  width: 100%;
+}
