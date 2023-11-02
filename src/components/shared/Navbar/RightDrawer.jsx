@@ -50,7 +50,11 @@ const RightDrawer = () => {
               ></textarea>
             </div>
             <div>
-              <Button text="Submit Now" type="submit" className=""></Button>
+              <Button
+                text="Submit Now"
+                type="submit"
+                className="lowercase"
+              ></Button>
             </div>
           </form>
         </div>
