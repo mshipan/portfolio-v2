@@ -7,5 +7,5 @@ export default {
       notoSans: ["Noto Sans SC", "sans-serif"],
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

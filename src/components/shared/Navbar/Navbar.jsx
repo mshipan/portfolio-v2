@@ -4,9 +4,12 @@ import { BiMenu } from "react-icons/bi";
 import "./Navbar.css";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
+import RightDrawer from "./RightDrawer";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const navItems = [
     { text: "Home", link: "/" },
     { text: "About", link: "/about" },
@@ -30,6 +33,10 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0">
       <div className="bg-[#02050a] flex items-center justify-between md:w-3/5 md:max-xl:w-[95%] mx-auto">
@@ -46,7 +53,12 @@ const Navbar = () => {
         </div>
         {/* For the Large screen */}
         <div className="hidden md:block md:px-3 px-1 md:py-2 py-1 bg-[#55e6a5]">
-          <BiMenu className="text-[#02050a] md:text-5xl text-4xl cursor-pointer" />
+          <label
+            htmlFor="my-drawer-4"
+            className="text-[#02050a] md:text-5xl text-4xl cursor-pointer"
+          >
+            <BiMenu onClick={toggleDrawer} />
+          </label>
         </div>
         {/* For the small screen */}
         <div
@@ -68,6 +80,31 @@ const Navbar = () => {
         <ul className="text-white font-notoSans uppercase text-sm flex flex-col items-center gap-3">
           {navLinks}
         </ul>
+      </div>
+      {/* Drawer */}
+      <div className="drawer drawer-end">
+        <input
+          id="my-drawer-4"
+          type="checkbox"
+          className="drawer-toggle"
+          checked={isDrawerOpen}
+        />
+        <div className="drawer-content">
+          {/* Page content here */
+          /* You can include any content you want inside the drawer */}
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+            onClick={toggleDrawer}
+          />
+          <div className=" w-80 min-h-full text-base-content bg-[#09101a]">
+            {/* Sidebar content here  */}
+            <RightDrawer />
+          </div>
+        </div>
       </div>
     </div>
   );
