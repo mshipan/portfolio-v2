@@ -9,6 +9,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navItems = [
     { text: "Home", link: "/" },
+    { text: "About", link: "/about" },
+    { text: "Service", link: "/service" },
+    { text: "Projects", link: "/projects" },
     { text: "Blog", link: "/blog" },
     { text: "Contact", link: "/contact" },
   ];
@@ -29,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0">
-      <div className="bg-[#02050a] flex items-center justify-between md:w-3/5 mx-auto">
+      <div className="bg-[#02050a] flex items-center justify-between md:w-3/5 md:max-xl:w-[95%] mx-auto">
         <div className="flex items-center md:gap-5 gap-2">
           <img src={logo} className="md:w-16 w-11 md:h-16 h-11" alt="Logo" />
           <h1 className=" text-white font-notoSans font-semibold md:text-2xl uppercase">
@@ -37,7 +40,7 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="hidden md:block">
-          <ul className="text-white font-notoSans uppercase text-sm flex items-center gap-12">
+          <ul className="text-white font-notoSans uppercase text-sm flex items-center md:gap-5">
             {navLinks}
           </ul>
         </div>
@@ -58,8 +61,8 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`md:hidden block bg-[#02050a] py-4 border-y border-[#55e6a5] absolute w-full transition-all ease-out duration-300 ${
-          isMenuOpen ? "top-11" : "-top-40 opacity-0"
+        className={`md:hidden block bg-[#02050a] py-4 border-y border-[#55e6a5] absolute w-full transition-all ease-out duration-500 ${
+          isMenuOpen ? "top-11" : "-top-72 opacity-0"
         }`}
       >
         <ul className="text-white font-notoSans uppercase text-sm flex flex-col items-center gap-3">
