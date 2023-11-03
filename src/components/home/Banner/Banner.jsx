@@ -5,6 +5,7 @@ import { PiDownloadSimple } from "react-icons/pi";
 import { FaPlayCircle } from "react-icons/fa";
 import myImg from "../../../assets/me.png";
 import { useEffect } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 const Banner = () => {
   useEffect(() => {
@@ -28,8 +29,25 @@ const Banner = () => {
             <h1 className="text-5xl uppercase font-notoSans text-white">
               hi, i&apos;m shipan
             </h1>
+
             <h1 className="text-5xl uppercase font-notoSans text-white">
-              creative <span>coder</span>
+              creative
+              <TypeAnimation
+                sequence={[
+                  // Same substring at the start will only be typed once, initially
+                  "CODER",
+                  1000,
+                  "TEAM PLAYER",
+                  1000,
+                  "DESIGNER",
+                  1000,
+                  "DEVELOPER",
+                  1000,
+                ]}
+                className="text-[#55e6a5] ml-3"
+                speed={50}
+                repeat={Infinity}
+              />
             </h1>
           </div>
           <p className="text-zinc-300 max-w-md text-sm">
