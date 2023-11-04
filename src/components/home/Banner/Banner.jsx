@@ -4,10 +4,23 @@ import Button from "../../shared/Button";
 import { PiDownloadSimple } from "react-icons/pi";
 import { FaPlayCircle } from "react-icons/fa";
 import myImg from "../../../assets/me.png";
-import { useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { Dialog, Transition } from "@headlessui/react";
+import { FaXmark } from "react-icons/fa6";
 
 const Banner = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const PDF_FILE_URL = "http://localhost:5173/CV_of_Shipan_Mallik.pdf";
   useEffect(() => {
     const text = document.querySelector(".text p");
     text.innerHTML = text.innerText
@@ -18,6 +31,17 @@ const Banner = () => {
       )
       .join("");
   }, []);
+
+  const downloadFileAtUrl = (url) => {
+    const fileName = url.split("/").pop();
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.setAttribute("download", fileName);
+    document.body.appendChild(aTag);
+    aTag.click();
+    aTag.remove();
+  };
+
   return (
     <div className="relative z-0">
       <div>
@@ -63,13 +87,51 @@ const Banner = () => {
               text="download cv"
               className="capitalize flex items-center gap-2"
               icon={<PiDownloadSimple />}
+              onClick={() => {
+                downloadFileAtUrl(PDF_FILE_URL);
+              }}
             />
-            <button className="flex items-center gap-3">
+
+            <button onClick={openModal} className="flex items-center gap-3">
               <FaPlayCircle className="text-4xl text-[#55e6a5]" />
               <span className="capitalize text-white hover:text-[#55e6a5] transition-all ease-out duration-500">
                 watch the video
               </span>
             </button>
+
+            <Transition appear show={isOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <div className="fixed inset-0 overflow-y-auto">
+                  <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
+                    >
+                      <Dialog.Panel className="w-full max-w-3xl transform bg-white text-left align-middle shadow-xl transition-all">
+                        <div className="">
+                          <button
+                            type="button"
+                            className="absolute -top-1 -right-2 bg-white p-2 rounded-full z-50"
+                            onClick={closeModal}
+                          >
+                            <FaXmark className="text-[#141c27]" />
+                          </button>
+                          <iframe
+                            className="w-full aspect-video"
+                            src="https://www.youtube.com/embed/pJQXGmMofro?si=LE5Jav2uUHxOfTh5"
+                          ></iframe>
+                        </div>
+                      </Dialog.Panel>
+                    </Transition.Child>
+                  </div>
+                </div>
+              </Dialog>
+            </Transition>
           </div>
         </div>
         <div className="hidden md:block">
