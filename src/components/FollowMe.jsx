@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const FollowMe = () => {
   return (
-    <div className="fixed bottom-36 right-1 z-40">
+    <div className="fixed bottom-36 right-1 z-40 hidden md:block">
       <div className="flex items-center gap-3 transform rotate-90">
         <h1 className="text-zinc-400 capitalize hover:text-white transition-all ease-out duration-500">
           Follow me

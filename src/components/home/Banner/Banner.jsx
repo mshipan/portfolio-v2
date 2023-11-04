@@ -45,17 +45,21 @@ const Banner = () => {
   return (
     <div className="relative z-0">
       <div>
-        <img src={bannerBg} className="h-screen" alt="Banner Image" />
+        <img
+          src={bannerBg}
+          className="h-[90vh] md:h-screen"
+          alt="Banner Image"
+        />
       </div>
       <div className="flex items-center justify-between w-full px-2 md:px-0 md:w-3/5 md:max-xl:w-[95%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
-            <h1 className="text-5xl uppercase font-notoSans text-white">
-              hi, i&apos;m shipan
+            <h1 className="sm:max-xl:text-3xl xl:max-2xl:text-2xl text-5xl uppercase font-notoSans text-white">
+              hi, i&apos;m shipan!
             </h1>
 
-            <h1 className="text-5xl uppercase font-notoSans text-white">
-              creative
+            <h1 className="sm:max-xl:text-3xl xl:max-2xl:text-3xl text-5xl uppercase font-notoSans text-white flex flex-col md:flex-row md:gap-2">
+              <span>creative</span>
               <TypeAnimation
                 sequence={[
                   // Same substring at the start will only be typed once, initially
@@ -68,7 +72,7 @@ const Banner = () => {
                   "DEVELOPER",
                   1000,
                 ]}
-                className="text-[#55e6a5] ml-3"
+                className="text-[#55e6a5]"
                 speed={50}
                 repeat={Infinity}
               />
@@ -82,7 +86,7 @@ const Banner = () => {
             and Firebase. Let&apos;s craft user-friendly interfaces that engage
             and delight users!
           </p>
-          <div className="flex items-center gap-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
             <Button
               text="download cv"
               className="capitalize flex items-center gap-2"
@@ -134,7 +138,7 @@ const Banner = () => {
             </Transition>
           </div>
         </div>
-        <div className="hidden md:block">
+        <div className="hidden md:block md:max-lg:hidden">
           <div className="relative">
             <div className="circle top-1/2 left-1/2 transform -translate-x-1/2">
               <div className="relative">
@@ -181,7 +185,11 @@ const Banner = () => {
                 </div>
               </div>
               <div className="absolute z-50">
-                <img src={myImg} alt="My Image" className="w-[30rem]" />
+                <img
+                  src={myImg}
+                  alt="My Image"
+                  className="xl:max-2xl:w-80 w-[30rem]"
+                />
               </div>
               <div className="text z-0">
                 <p className="font-notoSans text-white">
