@@ -5,6 +5,7 @@ export default {
     extend: {},
     fontFamily: {
       notoSans: ["Noto Sans SC", "sans-serif"],
+      poppins: ["Poppins", "sans-serif"],
     },
   },
   plugins: [require("daisyui")],

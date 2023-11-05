@@ -5,6 +5,7 @@ import "./Navbar.css";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import RightDrawer from "./RightDrawer";
+import { Link } from "react-scroll";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,19 +14,32 @@ const Navbar = () => {
   const navItems = [
     { text: "Home", link: "/" },
     { text: "About", link: "/about" },
-    { text: "Service", link: "/service" },
+    { text: "Service", link: "service" },
     { text: "Projects", link: "/projects" },
     { text: "Blog", link: "/blog" },
     { text: "Contact", link: "/contact" },
   ];
   const navLinks = navItems.map((item, index) => (
     <li key={index}>
-      <NavLink
-        to={item.link}
-        className={({ isActive }) => (isActive ? "text-[#55e6a5]" : "")}
-      >
-        {item.text}
-      </NavLink>
+      {item.link.startsWith("/") ? (
+        <NavLink
+          to={item.link}
+          className={({ isActive }) => (isActive ? "text-[#55e6a5]" : "")}
+        >
+          {item.text}
+        </NavLink>
+      ) : (
+        <Link
+          to={item.link}
+          className={({ isActive }) => (isActive ? "text-[#55e6a5]" : "")}
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+        >
+          {item.text}
+        </Link>
+      )}
     </li>
   ));
 
