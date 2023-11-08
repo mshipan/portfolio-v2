@@ -35,7 +35,7 @@ const About = () => {
         <h1 className="text-[#55e6a5] text-2xl font-light font-poppins mb-10">
           About me
         </h1>
-        <div className="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto gap-10">
+        <div className="flex flex-col md:max-lg:flex-col md:flex-row items-center justify-between w-[90%] mx-auto gap-10">
           <div className="bg-zinc-900 p-10 w-72 h-72 md:w-96 md:h-96 flex flex-col items-center justify-center gap-10 md:gap-28">
             <div className="relative flex h-20 w-20">
               <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-700 opacity-75"></div>
@@ -89,7 +89,7 @@ const About = () => {
             />
           </div>
           <div className="flex flex-col gap-7">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:max-lg:items-center gap-4">
               <h1 className="font-notoSans text-4xl md:text-5xl text-white">
                 I&apos;m shipan mallik
               </h1>
