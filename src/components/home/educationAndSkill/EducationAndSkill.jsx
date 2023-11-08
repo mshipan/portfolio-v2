@@ -23,7 +23,7 @@ const EducationAndSkill = () => {
           Education & Skills
         </h1>
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mx-2 md:mx-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:max-xl:grid-cols-1 gap-10 mx-2 md:mx-0">
             <div className="flex flex-col gap-2">
               <div className="flex">
                 <div className="flex items-center gap-1 px-4 py-2 border border-[#55e6a5] text-[#55e6a5] font-medium">
