@@ -9,7 +9,10 @@ import { FreeMode } from "swiper/modules";
 
 const Portfolio = () => {
   return (
-    <div className="mt-32 mb-20 w-full text-center md:text-left mx-auto">
+    <div
+      id="projects"
+      className="mt-32  w-full text-center md:text-left mx-auto"
+    >
       <div className="">
         <div className="flex flex-col items-center gap-5">
           <h1 className="text-[#55e6a5] text-2xl font-light font-poppins ">
@@ -33,7 +36,6 @@ const Portfolio = () => {
             spaceBetween={0}
             centeredSlides={true}
             freeMode={true}
-            loop={true}
             modules={[FreeMode]}
             breakpoints={{
               // When window width is >= 768px (desktop)
