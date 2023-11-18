@@ -13,7 +13,7 @@ const Portfolio = () => {
       id="projects"
       className="mt-32  w-full text-center md:text-left mx-auto"
     >
-      <div className="">
+      <div>
         <div className="flex flex-col items-center gap-5">
           <h1 className="text-[#55e6a5] text-2xl font-light font-poppins ">
             Portfolio
