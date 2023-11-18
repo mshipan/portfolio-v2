@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import blogImg from "../assets/blog1.jpg";
 import userImg from "../assets/user.jpg";
 import { AiFillLike } from "react-icons/ai";
@@ -5,7 +6,7 @@ import { FaComments } from "react-icons/fa";
 
 const BlogCard = () => {
   return (
-    <div className="w-80">
+    <div className="w-80 xl:max-2xl:w-80">
       <div className="overflow-hidden bg-cover bg-no-repeat rounded-t-lg">
         <img
           src={blogImg}
@@ -20,9 +21,11 @@ const BlogCard = () => {
           </div>
         </div>
         <div className="pt-10 px-4">
-          <h1 className="text-white text-xl font-semibold font-notoSans">
-            Don't wait until you officially started
-          </h1>
+          <Link to="/">
+            <h1 className="text-white text-xl font-semibold font-notoSans hover:underline">
+              Don't wait until you officially started
+            </h1>
+          </Link>
           <p className="text-zinc-400 font-poppins text-sm py-3">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
             adipisci perferendis tempora.

@@ -21,7 +21,7 @@ const Blog = () => {
         </div>
       </div>
 
-      <div className="mt-12 flex items-center justify-between">
+      <div className="mt-12 flex flex-col md:max-xl:flex-col md:max-xl:gap-5 xl:gap-5 md:flex-row items-center justify-between gap-5 md:gap-0">
         <BlogCard />
         <BlogCard />
         <BlogCard />
