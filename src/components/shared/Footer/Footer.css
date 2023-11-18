@@ -1,0 +1,9 @@
+.footerBg {
+    background-color: rgb(40, 34, 34);
+    background-image: url("../../../assets/blog1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+}
