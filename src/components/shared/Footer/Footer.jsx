@@ -16,12 +16,12 @@ const Footer = () => {
           get latest updates
         </h1>
         <div className="flex flex-col items-center gap-5">
-          <h1 className="text-white text-5xl font-bold font-notoSans capitalize">
+          <h1 className="text-white text-5xl font-bold font-notoSans capitalize text-center md:text-left">
             subscribe for newsletter
           </h1>
-          <div className="w-full mt-5 border border-[#55e6a5]">
-            <form className="flex w-full">
-              <div className="form-control w-3/4">
+          <div className="w-[96%] md:w-full mx-auto mt-5 md:border md:border-[#55e6a5]">
+            <form className="flex flex-col md:flex-row items-center w-full gap-4 md:gap-0">
+              <div className="form-control w-full md:w-3/4 border border-[#55e6a5] md:border-none">
                 <input
                   type="email"
                   name="email"
@@ -32,24 +32,26 @@ const Footer = () => {
               <Button
                 text="subscribe now"
                 type="submit"
-                className="flex items-center gap-1 capitalize w-1/4"
+                className="flex items-center gap-1 capitalize md:w-1/4"
               />
             </form>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-8 my-16">
+      <div className="flex flex-col md:flex-row md:max-xl:flex-col items-center justify-center md:gap-8 gap-4 my-16">
         <div className="flex items-center gap-4">
           <div className="p-5 border border-zinc-800 hover:border-white rounded-full text-white hover:text-[#02050a] hover:bg-white transition-all ease-in-out duration-500">
             <FaPhoneAlt />
           </div>
-          <h1 className="font-poppins text-2xl text-white">+88 01622 543390</h1>
+          <h1 className="font-poppins text-lg md:text-2xl text-white">
+            +88 01622 543390
+          </h1>
         </div>
         <div className="flex items-center gap-4">
           <div className="p-5 border border-zinc-800 hover:border-white rounded-full text-white hover:text-[#02050a] hover:bg-white transition-all ease-in-out duration-500">
             <IoIosMail />
           </div>
-          <h1 className="font-poppins text-2xl text-white">
+          <h1 className="font-poppins text-lg md:text-2xl text-white">
             shipanmallik95@gmail.com
           </h1>
         </div>
@@ -73,7 +75,7 @@ const Footer = () => {
       </div>
       <div className="border-t border-zinc-800">
         <div className="py-2">
-          <div className="md:w-3/5 w-full mx-auto flex items-center justify-between">
+          <div className="md:w-3/5 w-full mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-4 md:gap-0">
             <p className="text-sm text-zinc-500 font-poppins">
               &copy; 2023 All Right Reserved by
               <Link to="/">
