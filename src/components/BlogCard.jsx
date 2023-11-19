@@ -26,7 +26,7 @@ const BlogCard = () => {
               Don't wait until you officially started
             </h1>
           </Link>
-          <p className="text-zinc-400 font-poppins text-sm py-3">
+          <p className="text-zinc-400 font-poppins text-sm py-3 text-justify">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
             adipisci perferendis tempora.
           </p>
