@@ -51,14 +51,14 @@ const Banner = () => {
           alt="Banner Image"
         />
       </div>
-      <div className="flex items-center justify-between w-full px-2 md:px-0 md:w-3/5 md:max-xl:w-[95%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="flex md:max-xl:flex-col-reverse sm:max-xl:flex-col-reverse sm:max-xl:gap-32 md:max-xl:gap-32 items-center justify-between w-full px-2 md:px-0 md:w-3/5 md:max-xl:w-[95%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:max-xl:items-center sm:max-xl:items-center">
             <h1 className="sm:max-xl:text-3xl xl:max-2xl:text-2xl text-5xl uppercase font-notoSans text-white">
               hi, i&apos;m shipan!
             </h1>
 
-            <h1 className="sm:max-xl:text-3xl xl:max-2xl:text-3xl text-5xl uppercase font-notoSans text-white flex flex-col md:flex-row md:gap-2">
+            <h1 className="sm:max-xl:text-3xl xl:max-2xl:text-3xl text-5xl uppercase font-notoSans text-white flex flex-col sm:max-xl:flex-row sm:max-xl:gap-2 md:flex-row md:gap-2">
               <span>creative</span>
               <TypeAnimation
                 sequence={[
@@ -78,7 +78,7 @@ const Banner = () => {
               />
             </h1>
           </div>
-          <p className="text-zinc-300 max-w-md text-sm">
+          <p className="text-zinc-300 max-w-md text-sm md:max-xl:text-center">
             I&apos;m a passionate Web Developer with a knack for creating
             captivating digital experiences. My skills include HTML5, CSS3,
             JavaScript, React, Redux, and UI libraries like Tailwind CSS and
@@ -86,7 +86,7 @@ const Banner = () => {
             and Firebase. Let&apos;s craft user-friendly interfaces that engage
             and delight users!
           </p>
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
+          <div className="flex flex-col sm:max-xl:flex-row md:flex-row items-start md:items-center md:max-xl:justify-center gap-8">
             <Button
               text="download cv"
               className="capitalize flex items-center gap-2"
@@ -138,9 +138,9 @@ const Banner = () => {
             </Transition>
           </div>
         </div>
-        <div className="hidden md:block md:max-lg:hidden">
+        <div className="hidden md:max-xl:block sm:max-xl:block xl:block">
           <div className="relative">
-            <div className="circle top-1/2 left-1/2 transform -translate-x-1/2">
+            <div className="circle top-1/2 sm:max-xl:top-16 left-1/2 transform -translate-x-1/2">
               <div className="relative">
                 <div className="blob absolute">
                   <svg viewBox="0 0 165 165" xmlns="http://www.w3.org/2000/svg">
@@ -188,7 +188,7 @@ const Banner = () => {
                 <img
                   src={myImg}
                   alt="My Image"
-                  className="xl:max-2xl:w-80 w-[30rem]"
+                  className="xl:max-2xl:w-80 w-[30rem] sm:max-xl:w-[25rem]"
                 />
               </div>
               <div className="text z-0">
