@@ -3,9 +3,10 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import Button from "../../shared/Button";
 import { BsPlus } from "react-icons/bs";
-import projectImg from "../../../assets/cc.png";
-import projectBg from "../../../assets/projectBg.jpg";
+
 import { FreeMode } from "swiper/modules";
+import { Link } from "react-router-dom";
+import ProjectCard from "../../ProjectCard";
 
 const Portfolio = () => {
   return (
@@ -22,11 +23,13 @@ const Portfolio = () => {
             <h1 className="text-white text-5xl font-bold font-notoSans capitalize">
               my recent complete projects
             </h1>
-            <Button
-              text="more project"
-              icon={<BsPlus />}
-              className="flex items-center gap-1 capitalize"
-            />
+            <Link to="/projects">
+              <Button
+                text="more project"
+                icon={<BsPlus />}
+                className="flex items-center gap-1 capitalize"
+              />
+            </Link>
           </div>
         </div>
 
@@ -59,109 +62,19 @@ const Portfolio = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <div className="flex flex-col items-start gap-5">
-                <div
-                  className="px-5 pt-8 md:px-20 md:pt-16 bg-zinc-900 bg-cover bg-blend-darken"
-                  style={{ backgroundImage: `url(${projectBg})` }}
-                >
-                  <div
-                    className="hero w-80 h-80 md:w-[25rem] md:h-[25rem] object-top bg-top hover:bg-bottom transition-all duration-[4s] ease-in-out"
-                    style={{ backgroundImage: `url(${projectImg})` }}
-                  ></div>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-                  <h1 className="text-2xl font-bold mb-2">
-                    Chemistry Corner 1
-                  </h1>
-                  <p className="text-base text-zinc-500">
-                    Online Dating Platform
-                  </p>
-                </div>
-              </div>
+              <ProjectCard />
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex flex-col items-start gap-5">
-                <div
-                  className="px-5 pt-8 md:px-20 md:pt-16 bg-zinc-900 bg-cover bg-blend-darken"
-                  style={{ backgroundImage: `url(${projectBg})` }}
-                >
-                  <div
-                    className="hero w-80 h-80 md:w-[25rem] md:h-[25rem] object-top bg-top hover:bg-bottom transition-all duration-[4s] ease-in-out"
-                    style={{ backgroundImage: `url(${projectImg})` }}
-                  ></div>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-                  <h1 className="text-2xl font-bold mb-2">
-                    Chemistry Corner 1
-                  </h1>
-                  <p className="text-base text-zinc-500">
-                    Online Dating Platform
-                  </p>
-                </div>
-              </div>
+              <ProjectCard />
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex flex-col items-start gap-5">
-                <div
-                  className="px-5 pt-8 md:px-20 md:pt-16 bg-zinc-900 bg-cover bg-blend-darken"
-                  style={{ backgroundImage: `url(${projectBg})` }}
-                >
-                  <div
-                    className="hero w-80 h-80 md:w-[25rem] md:h-[25rem] object-top bg-top hover:bg-bottom transition-all duration-[4s] ease-in-out"
-                    style={{ backgroundImage: `url(${projectImg})` }}
-                  ></div>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-                  <h1 className="text-2xl font-bold mb-2">
-                    Chemistry Corner 1
-                  </h1>
-                  <p className="text-base text-zinc-500">
-                    Online Dating Platform
-                  </p>
-                </div>
-              </div>
+              <ProjectCard />
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex flex-col items-start gap-5">
-                <div
-                  className="px-5 pt-8 md:px-20 md:pt-16 bg-zinc-900 bg-cover bg-blend-darken"
-                  style={{ backgroundImage: `url(${projectBg})` }}
-                >
-                  <div
-                    className="hero w-80 h-80 md:w-[25rem] md:h-[25rem] object-top bg-top hover:bg-bottom transition-all duration-[4s] ease-in-out"
-                    style={{ backgroundImage: `url(${projectImg})` }}
-                  ></div>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-                  <h1 className="text-2xl font-bold mb-2">
-                    Chemistry Corner 1
-                  </h1>
-                  <p className="text-base text-zinc-500">
-                    Online Dating Platform
-                  </p>
-                </div>
-              </div>
+              <ProjectCard />
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex flex-col items-start gap-5">
-                <div
-                  className="px-5 pt-8 md:px-20 md:pt-16 bg-zinc-900 bg-cover bg-blend-darken"
-                  style={{ backgroundImage: `url(${projectBg})` }}
-                >
-                  <div
-                    className="hero w-80 h-80 md:w-[25rem] md:h-[25rem] object-top bg-top hover:bg-bottom transition-all duration-[4s] ease-in-out"
-                    style={{ backgroundImage: `url(${projectImg})` }}
-                  ></div>
-                </div>
-                <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-                  <h1 className="text-2xl font-bold mb-2">
-                    Chemistry Corner 1
-                  </h1>
-                  <p className="text-base text-zinc-500">
-                    Online Dating Platform
-                  </p>
-                </div>
-              </div>
+              <ProjectCard />
             </SwiperSlide>
           </Swiper>
         </div>

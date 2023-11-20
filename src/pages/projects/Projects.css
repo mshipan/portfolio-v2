@@ -1,0 +1,6 @@
+.projectsBannerImage {
+    background-image: url('../../assets/banner-scaled.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

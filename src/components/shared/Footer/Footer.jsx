@@ -26,7 +26,7 @@ const Footer = () => {
                   type="email"
                   name="email"
                   placeholder="Enter Your Email"
-                  className="py-3 pl-4 outline-none placeholder:text-white text-white"
+                  className="py-3 pl-4 outline-none placeholder:text-white text-white bg-[#141c27]"
                 />
               </div>
               <Button
