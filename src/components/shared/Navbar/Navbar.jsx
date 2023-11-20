@@ -16,7 +16,7 @@ const Navbar = () => {
     { text: "About", link: "about" },
     { text: "Service", link: "service" },
     { text: "Projects", link: "projects" },
-    { text: "Blog", link: "/blog" },
+    { text: "Blog", link: "/blogs" },
     { text: "Contact", link: "/contact" },
   ];
   const navLinks = navItems.map((item, index) => (

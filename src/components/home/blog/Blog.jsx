@@ -1,6 +1,7 @@
 import { BsPlus } from "react-icons/bs";
 import Button from "../../shared/Button";
 import BlogCard from "../../BlogCard";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   return (
@@ -13,11 +14,13 @@ const Blog = () => {
           <h1 className="text-white text-5xl font-bold font-notoSans capitalize">
             my recent blog posts
           </h1>
-          <Button
-            text="more blog"
-            icon={<BsPlus />}
-            className="flex items-center gap-1 capitalize"
-          />
+          <Link to="/blogs">
+            <Button
+              text="more blog"
+              icon={<BsPlus />}
+              className="flex items-center gap-1 capitalize"
+            />
+          </Link>
         </div>
       </div>
 
