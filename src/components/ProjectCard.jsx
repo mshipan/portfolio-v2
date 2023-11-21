@@ -1,5 +1,6 @@
 import projectBg from "../assets/projectBg.jpg";
 import projectImg from "../assets/cc.png";
+import { Link } from "react-router-dom";
 const ProjectCard = () => {
   return (
     <div className="flex flex-col items-start gap-5">
@@ -13,7 +14,11 @@ const ProjectCard = () => {
         ></div>
       </div>
       <div className="h-full flex flex-col items-start justify-center gap-3 text-white">
-        <h1 className="text-2xl font-bold mb-2">Chemistry Corner 1</h1>
+        <Link to="/project">
+          <h1 className="text-2xl font-bold mb-2 hover:underline">
+            Chemistry Corner 1
+          </h1>
+        </Link>
         <p className="text-base text-zinc-500">Online Dating Platform</p>
       </div>
     </div>
