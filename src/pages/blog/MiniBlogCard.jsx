@@ -8,7 +8,7 @@ const MiniBlogCard = () => {
         <img src={blogImg} alt="Blog Image" className="w-20" />
       </div>
       <div>
-        <h1 className="text-white text-lg font-notoSans capitalize">
+        <h1 className="text-white text-lg font-notoSans capitalize text-left">
           Lorem ipsum dolor sit amet.
         </h1>
         <div className="text-zinc-400 flex items-start md:items-center gap-2">

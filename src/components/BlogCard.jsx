@@ -21,7 +21,7 @@ const BlogCard = () => {
           </div>
         </div>
         <div className="pt-10 px-4">
-          <Link to="/">
+          <Link to="/blog">
             <h1 className="text-white text-xl font-semibold font-notoSans hover:underline">
               Don't wait until you officially started
             </h1>
