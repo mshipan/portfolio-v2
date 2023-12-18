@@ -5,6 +5,7 @@ import { BsPostcard, BsPersonFillGear } from "react-icons/bs";
 import { AiOutlineContacts } from "react-icons/ai";
 import { MdDesignServices, MdOutlineRateReview } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
+import { FaUserGraduate } from "react-icons/fa6";
 
 import { MdOutlineMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -13,6 +14,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "About Me", path: "/dashboard/about-me", icon: FaRegUserCircle },
+    { title: "Education", path: "/dashboard/education", icon: FaUserGraduate },
     { title: "Skills", src: "Chart_fill", icon: BsPersonFillGear, gap: true },
     { title: "Projects", src: "Chat", icon: GoProjectRoadmap, gap: true },
     { title: "Blogs", src: "User", icon: BsPostcard, gap: true },
