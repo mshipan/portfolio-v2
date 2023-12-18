@@ -7,6 +7,7 @@ import Projects from "../pages/projects/Projects";
 import ProjectDetails from "../pages/projects/ProjectDetails";
 import BlogDetails from "../pages/blog/BlogDetails";
 import DashBoardLayout from "../layouts/DashBoardLayout";
+import LoginPage from "../pages/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         element: <h1>Hello</h1>,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
 ]);
 

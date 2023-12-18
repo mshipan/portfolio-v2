@@ -1,4 +1,5 @@
 import { useState } from "react";
+import fav from "../../assets/favicon.jpg";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GoProjectRoadmap } from "react-icons/go";
 import { BsPostcard, BsPersonFillGear } from "react-icons/bs";
@@ -47,10 +48,7 @@ const Sidebar = () => {
         />
       )}
       <div className="flex gap-x-4 items-center">
-        <img
-          src="./src/assets/favicon.jpg"
-          className="cursor-pointer duration-500 w-10"
-        />
+        <img src={fav} className="cursor-pointer duration-500 w-10" />
         <h1
           className={`text-white origin-left font-medium text-xl duration-200 font-notoSans ${
             !open && "scale-0"

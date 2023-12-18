@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../../assets/favicon.jpg";
 import Button from "../Button";
 
@@ -7,7 +8,11 @@ const RightDrawer = () => {
       <div className="bg-[#141c27]">
         <div className="flex items-center gap-3 p-4">
           <img src={logo} alt="Website Logo" className="w-14" />
-          <h1 className="font-notoSans uppercase text-xl text-white">Shipan</h1>
+          <Link to="/dashboard">
+            <h1 className="font-notoSans uppercase text-xl text-white">
+              Shipan
+            </h1>
+          </Link>
         </div>
       </div>
       <div className="p-4 mt-7 mb-8">
