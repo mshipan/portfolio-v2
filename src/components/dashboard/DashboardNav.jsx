@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PiUserCircleLight } from "react-icons/pi";
+import { AuthContext } from "../../providers/AuthProviders";
+import toast from "react-hot-toast";
 
 const DashboardNav = () => {
+  const { setLoading, logOut } = useContext(AuthContext);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout successfull");
+        setLoading(false);
+        setIsUserDropdownOpen(false);
+      })
+      .catch((error) => {
+        toast.error(`${error.message}`);
+        setLoading(false);
+      });
+  };
   const userMenuDropdown = (
     <>
       <li>
-        <button>Log Out</button>
+        <button onClick={handleLogout}>Log Out</button>
       </li>
     </>
   );

@@ -8,6 +8,7 @@ import ProjectDetails from "../pages/projects/ProjectDetails";
 import BlogDetails from "../pages/blog/BlogDetails";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import LoginPage from "../pages/LoginPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />,
+      </PrivateRoute>
+    ),
+
     children: [
       {
         path: "/dashboard/about-me",
