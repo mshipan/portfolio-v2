@@ -9,6 +9,7 @@ import BlogDetails from "../pages/blog/BlogDetails";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
+import AboutMe from "../pages/dashboard/AboutMe";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/about-me",
-        element: <h1>Hello</h1>,
+        element: <AboutMe />,
       },
     ],
   },

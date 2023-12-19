@@ -29,8 +29,8 @@ const LoginPage = () => {
       });
   };
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div className="flex items-center justify-center">
+    <div className="md:h-screen h-[100svh] flex items-center justify-center">
+      <div className="flex flex-col md:flex-row items-center justify-center">
         <LoginAnimation />
         <div>
           <h1 className="text-4xl font-notoSans text-white mb-5">
