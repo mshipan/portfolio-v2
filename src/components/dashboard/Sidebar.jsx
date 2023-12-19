@@ -5,8 +5,10 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { BsPostcard, BsPersonFillGear } from "react-icons/bs";
 import { AiOutlineContacts } from "react-icons/ai";
 import { MdDesignServices, MdOutlineRateReview } from "react-icons/md";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp, IoHome } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa6";
+import { RiPagesLine } from "react-icons/ri";
+import { CgWebsite } from "react-icons/cg";
 
 import { MdOutlineMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -28,9 +30,14 @@ const Sidebar = () => {
       gap: true,
     },
   ];
+  const homeMenus = [
+    { title: "Home", path: "/", icon: IoHome },
+    { title: "Blog", path: "/blog", icon: RiPagesLine },
+    { title: "Contact Me", path: "/contact", icon: CgWebsite },
+  ];
   return (
     <div
-      className={` bg-[#0c172b] h-screen p-5  pt-3 relative duration-300 ${
+      className={` bg-[#0c172b] h-screen p-5 pt-3 relative duration-300 ${
         open ? "w-72" : "w-20 "
       }`}
     >
@@ -73,6 +80,26 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <div className="border-t border-slate-400 mt-10">
+        <ul className="pt-5">
+          {homeMenus.map(({ title, icon: Icon, path, gap }, index) => (
+            <li key={index}>
+              <NavLink
+                to={path}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+              ${gap ? "mt-4" : "mt-2"} ${index === 0 && "bg-light-white"} `}
+              >
+                <Icon size={20} />
+                <span
+                  className={`${!open && "hidden"} origin-left duration-200`}
+                >
+                  {title}
+                </span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
