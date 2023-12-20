@@ -37,7 +37,7 @@ const Sidebar = () => {
   ];
   return (
     <div
-      className={` bg-[#0c172b] h-screen p-5 pt-3 relative duration-300 ${
+      className={` bg-[#0c172b] h-auto p-5 pt-3 relative duration-300 ${
         open ? "w-72" : "w-20 "
       }`}
     >
