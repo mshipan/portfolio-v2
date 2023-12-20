@@ -10,6 +10,7 @@ import DashBoardLayout from "../layouts/DashBoardLayout";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import AboutMe from "../pages/dashboard/AboutMe";
+import UpdateAboutMe from "../pages/dashboard/UpdateAboutMe";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/about-me",
         element: <AboutMe />,
+      },
+      {
+        path: "/dashboard/update-about-me",
+        element: <UpdateAboutMe />,
       },
     ],
   },

@@ -3,14 +3,16 @@ import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
 
-const AboutMe = () => {
+const UpdateAboutMe = () => {
   return (
     <div className="h-auto">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
-        <h1 className="text-2xl font-notoSans text-[#55e6a5]">About Me</h1>
+        <h1 className="text-2xl font-notoSans text-[#55e6a5]">
+          Update About Me
+        </h1>
         <div>
           <Link to="/dashboard/update-about-me">
-            <Button text="Update Info" />
+            <Button text="Update About Me" />
           </Link>
         </div>
       </div>
@@ -193,4 +195,4 @@ const AboutMe = () => {
   );
 };
 
-export default AboutMe;
+export default UpdateAboutMe;
