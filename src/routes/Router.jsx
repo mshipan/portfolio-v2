@@ -11,6 +11,8 @@ import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import AboutMe from "../pages/dashboard/AboutMe";
 import UpdateAboutMe from "../pages/dashboard/UpdateAboutMe";
+import Education from "../pages/dashboard/Education";
+import CreateEducation from "../pages/dashboard/CreateEducation";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update-about-me",
         element: <UpdateAboutMe />,
+      },
+      {
+        path: "/dashboard/education",
+        element: <Education />,
+      },
+      {
+        path: "/dashboard/create-education",
+        element: <CreateEducation />,
       },
     ],
   },

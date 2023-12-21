@@ -28,7 +28,6 @@ const UpdateAboutMe = () => {
             <input
               type="text"
               name="name"
-              readOnly
               value="Shipan"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -44,7 +43,6 @@ const UpdateAboutMe = () => {
             <input
               type="text"
               name="role"
-              readOnly
               value="Front End Web Developer"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -59,7 +57,6 @@ const UpdateAboutMe = () => {
             </label>
             <textarea
               name="about"
-              readOnly
               cols="30"
               rows="5"
               value="I'm a passionate Web Developer with a knack for creating captivating digital experiences. My skills include HTML5, CSS3, JavaScript, React, Redux, and UI libraries like Tailwind CSS and Bootstrap. On the backend, I excel in Node.js, Express.js, MongoDB, and Firebase. Let's craft user-friendly interfaces that engage and delight users!"
@@ -77,7 +74,6 @@ const UpdateAboutMe = () => {
             <input
               type="text"
               name="mobile"
-              readOnly
               value="01622543390"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -93,7 +89,6 @@ const UpdateAboutMe = () => {
             <input
               type="email"
               name="email"
-              readOnly
               value="shipanmallik95@gmail.com"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -109,7 +104,6 @@ const UpdateAboutMe = () => {
             <input
               type="text"
               name="address"
-              readOnly
               value="Kathaltola, Mirpur 2"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -125,7 +119,6 @@ const UpdateAboutMe = () => {
             <input
               type="text"
               name="maplink"
-              readOnly
               value="<iframe>www.example.com</iframe>"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -146,7 +139,6 @@ const UpdateAboutMe = () => {
                 <input
                   type="text"
                   name="facebook"
-                  readOnly
                   value="www.facebook.com"
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
@@ -158,7 +150,6 @@ const UpdateAboutMe = () => {
                 <input
                   type="text"
                   name="twitter"
-                  readOnly
                   value="www.twitter.com"
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
@@ -170,7 +161,6 @@ const UpdateAboutMe = () => {
                 <input
                   type="text"
                   name="github"
-                  readOnly
                   value="www.github.com"
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
@@ -182,7 +172,6 @@ const UpdateAboutMe = () => {
                 <input
                   type="text"
                   name="linkedin"
-                  readOnly
                   value="www.linkedin.com"
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />

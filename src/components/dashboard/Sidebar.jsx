@@ -18,7 +18,7 @@ const Sidebar = () => {
   const Menus = [
     { title: "About Me", path: "/dashboard/about-me", icon: FaRegUserCircle },
     { title: "Education", path: "/dashboard/education", icon: FaUserGraduate },
-    { title: "Skills", src: "Chart_fill", icon: BsPersonFillGear, gap: true },
+    { title: "Skills", path: "Chart_fill", icon: BsPersonFillGear, gap: true },
     { title: "Projects", src: "Chat", icon: GoProjectRoadmap, gap: true },
     { title: "Blogs", src: "User", icon: BsPostcard, gap: true },
     { title: "Contacts ", src: "Calendar", icon: AiOutlineContacts, gap: true },
