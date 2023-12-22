@@ -1,5 +1,3 @@
-import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
 

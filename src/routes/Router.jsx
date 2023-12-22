@@ -13,6 +13,7 @@ import AboutMe from "../pages/dashboard/AboutMe";
 import UpdateAboutMe from "../pages/dashboard/UpdateAboutMe";
 import Education from "../pages/dashboard/Education";
 import CreateEducation from "../pages/dashboard/CreateEducation";
+import Skills from "../pages/dashboard/Skills";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/create-education",
         element: <CreateEducation />,
+      },
+      {
+        path: "/dashboard/skills",
+        element: <Skills />,
       },
     ],
   },
