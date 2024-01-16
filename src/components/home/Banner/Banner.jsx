@@ -20,7 +20,7 @@ const Banner = () => {
     setIsOpen(true);
   }
 
-  const PDF_FILE_URL = "http://localhost:5173/CV_of_Shipan_Mallik.pdf";
+  const PDF_FILE_URL = "https://portfolio-v2-de4b6.web.app/CV_of_Shipan_Mallik.pdf";
   useEffect(() => {
     const text = document.querySelector(".text p");
     text.innerHTML = text.innerText
