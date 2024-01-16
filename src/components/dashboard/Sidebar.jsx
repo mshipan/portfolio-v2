@@ -24,7 +24,12 @@ const Sidebar = () => {
       icon: BsPersonFillGear,
       gap: true,
     },
-    { title: "Projects", src: "Chat", icon: GoProjectRoadmap, gap: true },
+    {
+      title: "Projects",
+      path: "/dashboard/projects",
+      icon: GoProjectRoadmap,
+      gap: true,
+    },
     { title: "Blogs", src: "User", icon: BsPostcard, gap: true },
     { title: "Contacts ", src: "Calendar", icon: AiOutlineContacts, gap: true },
     { title: "Services", src: "Search", icon: MdDesignServices, gap: true },

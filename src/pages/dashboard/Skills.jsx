@@ -18,7 +18,7 @@ const Skills = () => {
   }, [inView]);
   return (
     <div className="h-auto md:h-auto" ref={ref}>
-      <div className="w-1/2">
+      <div className="md:w-1/2">
         <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-full md:max-xl:w-full">
           <h1 className="text-2xl font-notoSans text-[#55e6a5]">Skills</h1>
           <div>
@@ -48,7 +48,13 @@ const Skills = () => {
                 >
                   <CiEdit size={25} className="text-[#55e6a5]" title="Edit" />
                 </button>
-                <CiTrash size={25} className="text-[#55e6a5]" title="Delete" />
+                <button>
+                  <CiTrash
+                    size={25}
+                    className="text-[#55e6a5]"
+                    title="Delete"
+                  />
+                </button>
               </div>
             </div>
             <div className="flex flex-row items-center justify-between gap-5">
@@ -68,7 +74,13 @@ const Skills = () => {
                 >
                   <CiEdit size={25} className="text-[#55e6a5]" title="Edit" />
                 </button>
-                <CiTrash size={25} className="text-[#55e6a5]" title="Delete" />
+                <button>
+                  <CiTrash
+                    size={25}
+                    className="text-[#55e6a5]"
+                    title="Delete"
+                  />
+                </button>
               </div>
             </div>
           </div>
