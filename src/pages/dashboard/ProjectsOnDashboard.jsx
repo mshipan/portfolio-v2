@@ -57,6 +57,23 @@ const ProjectsOnDashboard = () => {
       border: "none",
       background: "#141c27",
     }),
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: "#141c27",
+      border: "1px solid #55e6a5",
+    }),
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: "white",
+      "&:hover": {
+        backgroundColor: "#55e6a5",
+        color: "white",
+      },
+    }),
   };
   return (
     <div className="h-auto md:h-auto">
