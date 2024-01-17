@@ -30,7 +30,7 @@ const Sidebar = () => {
       icon: GoProjectRoadmap,
       gap: true,
     },
-    { title: "Blogs", src: "User", icon: BsPostcard, gap: true },
+    { title: "Blogs", path: "/dashboard/blogs", icon: BsPostcard, gap: true },
     { title: "Contacts ", src: "Calendar", icon: AiOutlineContacts, gap: true },
     { title: "Services", src: "Search", icon: MdDesignServices, gap: true },
     {
@@ -42,7 +42,7 @@ const Sidebar = () => {
   ];
   const homeMenus = [
     { title: "Home", path: "/", icon: IoHome },
-    { title: "Blog", path: "/blog", icon: RiPagesLine },
+    { title: "Blog", path: "/blogs", icon: RiPagesLine },
     { title: "Contact Me", path: "/contact", icon: CgWebsite },
   ];
   return (
