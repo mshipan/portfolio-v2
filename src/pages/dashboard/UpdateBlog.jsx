@@ -1,11 +1,11 @@
 import Button from "../../components/shared/Button";
 
-const CreateBlog = () => {
+const UpdateBlog = () => {
   return (
     <div className="h-auto md:h-screen">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
         <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-full md:max-xl:w-full">
-          <h1 className="text-2xl font-notoSans text-[#55e6a5]">Create Blog</h1>
+          <h1 className="text-2xl font-notoSans text-[#55e6a5]">Update Blog</h1>
           <div>
             <Button
               onClick={() => document.getElementById("my_modal_5").showModal()}
@@ -112,4 +112,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default UpdateBlog;
