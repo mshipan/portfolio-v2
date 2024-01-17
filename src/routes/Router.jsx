@@ -15,6 +15,7 @@ import Education from "../pages/dashboard/Education";
 import CreateEducation from "../pages/dashboard/CreateEducation";
 import Skills from "../pages/dashboard/Skills";
 import ProjectsOnDashboard from "../pages/dashboard/ProjectsOnDashboard";
+import CreateProject from "../pages/dashboard/CreateProject";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/projects",
         element: <ProjectsOnDashboard />,
+      },
+      {
+        path: "/dashboard/create-project",
+        element: <CreateProject />,
       },
     ],
   },
