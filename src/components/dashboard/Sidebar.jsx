@@ -31,7 +31,12 @@ const Sidebar = () => {
       gap: true,
     },
     { title: "Blogs", path: "/dashboard/blogs", icon: BsPostcard, gap: true },
-    { title: "Contacts ", src: "Calendar", icon: AiOutlineContacts, gap: true },
+    {
+      title: "Contacts ",
+      path: "/dashboard/contacts",
+      icon: AiOutlineContacts,
+      gap: true,
+    },
     { title: "Services", src: "Search", icon: MdDesignServices, gap: true },
     {
       title: "Testimonials",
