@@ -2,6 +2,7 @@ import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
 import { CiStopwatch } from "react-icons/ci";
 import projectBanner from "../../assets/projectBanner.jpg";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 
 const ProjectsOnDashboard = () => {
   return (
@@ -36,16 +37,20 @@ const ProjectsOnDashboard = () => {
               inventore repellat.
             </p>
             <div className="flex items-center gap-3 mb-5">
+              <Link to="/dashboard/update-project">
+                <button
+                  className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
+                  title="Edit"
+                >
+                  <FaRegEdit />
+                  Edit
+                </button>
+              </Link>
               <button
-                className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500"
-                title="Edit"
-              >
-                Edit
-              </button>
-              <button
-                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500"
+                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
                 title="Delete"
               >
+                <FaRegTrashAlt />
                 Delete
               </button>
             </div>
@@ -70,16 +75,20 @@ const ProjectsOnDashboard = () => {
               inventore repellat.
             </p>
             <div className="flex items-center gap-3 mb-5">
+              <Link to="/dashboard/update-project">
+                <button
+                  className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
+                  title="Edit"
+                >
+                  <FaRegEdit />
+                  Edit
+                </button>
+              </Link>
               <button
-                className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500"
-                title="Edit"
-              >
-                Edit
-              </button>
-              <button
-                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500"
+                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
                 title="Delete"
               >
+                <FaRegTrashAlt />
                 Delete
               </button>
             </div>
@@ -104,16 +113,20 @@ const ProjectsOnDashboard = () => {
               inventore repellat.
             </p>
             <div className="flex items-center gap-3 mb-5">
+              <Link to="/dashboard/update-project">
+                <button
+                  className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
+                  title="Edit"
+                >
+                  <FaRegEdit />
+                  Edit
+                </button>
+              </Link>
               <button
-                className="bg-[#55e6a5] px-3 py-1 border border-[#55e6a5] text-black hover:text-[#55e6a5] font-poppins hover:bg-[#141c27] transition-all ease-in-out duration-500"
-                title="Edit"
-              >
-                Edit
-              </button>
-              <button
-                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500"
+                className="bg-[#141c27] px-3 py-1 border border-[#55e6a5] text-[#55e6a5] hover:text-black font-poppins hover:bg-[#55e6a5] transition-all ease-in-out duration-500 inline-flex items-center gap-1"
                 title="Delete"
               >
+                <FaRegTrashAlt />
                 Delete
               </button>
             </div>
