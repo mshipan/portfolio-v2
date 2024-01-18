@@ -102,7 +102,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="projectTitle"
-              value="Chemistry Corner 1"
+              placeholder="Project Title eg. Chemistry Corner 1"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -117,7 +117,22 @@ const CreateProject = () => {
             <input
               type="text"
               name="projectBanner"
-              value="http::www.example.com/"
+              placeholder="Project Details Banner Image link"
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="projectBg"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Project Bg:
+            </label>
+            <input
+              type="text"
+              name="projectBg"
+              placeholder="Long Page Screenshot link"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -133,7 +148,7 @@ const CreateProject = () => {
               name="projectDescription"
               cols="30"
               rows="5"
-              value="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vero modi possimus, aliquid minima nobis officia autem et eligendi consequatur!"
+              placeholder="Project Description..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
@@ -149,7 +164,7 @@ const CreateProject = () => {
               name="projectGoals"
               cols="30"
               rows="5"
-              value="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vero modi possimus, aliquid minima nobis officia autem et eligendi consequatur!"
+              placeholder="Project Goals..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
@@ -231,7 +246,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="projectDuration"
-              value="15 days need a calculation"
+              placeholder="Project Duration eg. 15 days (need a calculation)"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -274,6 +289,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="liveLink"
+              placeholder="Project Live Link..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -288,6 +304,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="githubClient"
+              placeholder="Github Client Site Repository..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -302,6 +319,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="githubServer"
+              placeholder="Github Server Site Repository..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -317,7 +335,7 @@ const CreateProject = () => {
               name="conclusion"
               cols="30"
               rows="5"
-              value="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vero modi possimus, aliquid minima nobis officia autem et eligendi consequatur!"
+              placeholder="Project Conclution..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
