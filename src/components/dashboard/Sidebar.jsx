@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fav from "../../assets/favicon.jpg";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaRegNewspaper } from "react-icons/fa";
 import { GoProjectRoadmap } from "react-icons/go";
 import { BsPostcard, BsPersonFillGear } from "react-icons/bs";
 import { AiOutlineContacts } from "react-icons/ai";
@@ -37,11 +37,16 @@ const Sidebar = () => {
       icon: AiOutlineContacts,
       gap: true,
     },
-    { title: "Services", src: "Search", icon: MdDesignServices, gap: true },
     {
-      title: "Testimonials",
-      src: "Chart",
-      icon: MdOutlineRateReview,
+      title: "Services",
+      path: "/dashboard/services",
+      icon: MdDesignServices,
+      gap: true,
+    },
+    {
+      title: "Newsletters",
+      path: "/dashboard/newsletters",
+      icon: FaRegNewspaper,
       gap: true,
     },
   ];

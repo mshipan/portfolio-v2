@@ -8,7 +8,7 @@ const ContactsOnDashboard = () => {
       </div>
       <div className="w-full md:w-1/2 md:max-xl:w-full">
         <div>
-          <div className="overflow-x-auto">
+          <div className="w-1/3 md:w-full overflow-x-auto">
             <table className="table border border-[#55e6a5]">
               <thead>
                 <tr className="border border-[#55e6a5]">

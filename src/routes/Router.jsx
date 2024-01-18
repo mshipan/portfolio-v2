@@ -21,6 +21,7 @@ import BlogsOnDashboard from "../pages/dashboard/BlogsOnDashboard";
 import CreateBlog from "../pages/dashboard/CreateBlog";
 import UpdateBlog from "../pages/dashboard/UpdateBlog";
 import ContactsOnDashboard from "../pages/dashboard/ContactsOnDashboard";
+import Services from "../pages/dashboard/Services";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/contacts",
         element: <ContactsOnDashboard />,
+      },
+      {
+        path: "/dashboard/services",
+        element: <Services />,
       },
     ],
   },

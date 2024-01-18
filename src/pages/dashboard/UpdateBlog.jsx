@@ -9,7 +9,7 @@ const UpdateBlog = () => {
           <div>
             <Button
               onClick={() => document.getElementById("my_modal_5").showModal()}
-              text="Create"
+              text="Update"
             />{" "}
             {/* modal */}
           </div>
