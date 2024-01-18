@@ -22,6 +22,7 @@ import CreateBlog from "../pages/dashboard/CreateBlog";
 import UpdateBlog from "../pages/dashboard/UpdateBlog";
 import ContactsOnDashboard from "../pages/dashboard/ContactsOnDashboard";
 import Services from "../pages/dashboard/Services";
+import NewsLetters from "../pages/dashboard/NewsLetters";
 
 const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/services",
         element: <Services />,
+      },
+      {
+        path: "/dashboard/newsletters",
+        element: <NewsLetters />,
       },
     ],
   },
