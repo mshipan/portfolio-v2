@@ -14,3 +14,13 @@
     background: #55e6a5 !important;
     border: 1px solid black !important;
   }
+
+  .friday-tile {
+    color: red !important; /* Example background color for Fridays */
+  }
+  .saturday-tile {
+    color: red !important; /* Example background color for Fridays */
+  }
+  .sunday-tile {
+    color: black !important; /* Example background color for Fridays */
+  }
