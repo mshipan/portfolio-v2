@@ -5,3 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.react-calendar {
+    background-color: #55e6a5 !important; 
+    width: 500px !important;
+  }
+
+  .react-calendar__tile--now {
+    background: #55e6a5 !important;
+    border: 1px solid black !important;
+  }
