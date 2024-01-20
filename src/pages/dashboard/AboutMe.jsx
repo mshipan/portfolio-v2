@@ -2,7 +2,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
-import { useGetAboutMeQuery } from "../../redux/features/api/baseApi";
+import { useGetAboutMeQuery } from "../../redux/features/api/aboutMe/aboutMeApi";
 
 const AboutMe = () => {
   const { data: aboutMe, isLoading, isError } = useGetAboutMeQuery();
@@ -17,7 +17,7 @@ const AboutMe = () => {
       </p>
     );
   }
-  console.log("About Me", aboutMe[0]);
+
   return (
     <div className="h-auto">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
@@ -58,7 +58,7 @@ const AboutMe = () => {
               name="role"
               readOnly
               value={aboutMe[0]?.role}
-              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins capitalize"
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
 

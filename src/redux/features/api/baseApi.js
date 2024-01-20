@@ -5,15 +5,7 @@ const baseApi = createApi({
     baseUrl: import.meta.env.VITE_baseApi,
   }),
   tagTypes: ["aboutMe"],
-  endpoints: (builder) => ({
-    //about-me
-    getAboutMe: builder.query({
-      query: () => "/about-me",
-      providesTags: ["aboutMe"],
-    }),
-  }),
+  endpoints: () => ({}),
 });
-
-export const { useGetAboutMeQuery } = baseApi;
 
 export default baseApi;
