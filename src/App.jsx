@@ -3,6 +3,8 @@ import router from "./routes/Router";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import Store from "./redux/Store";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +25,10 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Toaster />
-          <RouterProvider router={router} />
+          <Provider store={Store}>
+            <Toaster />
+            <RouterProvider router={router} />
+          </Provider>
         </>
       )}
     </div>

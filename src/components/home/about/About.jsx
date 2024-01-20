@@ -4,9 +4,10 @@ import { PiDownloadSimple } from "react-icons/pi";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaXmark } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const About = () => {
-  const PDF_FILE_URL = "http://localhost:5173/Resume_of_Shipan_Mallik.pdf";
+  // const PDF_FILE_URL = "http://localhost:5173/Resume_of_Shipan_Mallik.pdf";
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,15 +18,15 @@ const About = () => {
   function openModal() {
     setIsOpen(true);
   }
-  const downloadFileAtUrl = (url) => {
-    const fileName = url.split("/").pop();
-    const aTag = document.createElement("a");
-    aTag.href = url;
-    aTag.setAttribute("download", fileName);
-    document.body.appendChild(aTag);
-    aTag.click();
-    aTag.remove();
-  };
+  // const downloadFileAtUrl = (url) => {
+  //   const fileName = url.split("/").pop();
+  //   const aTag = document.createElement("a");
+  //   aTag.href = url;
+  //   aTag.setAttribute("download", fileName);
+  //   document.body.appendChild(aTag);
+  //   aTag.click();
+  //   aTag.remove();
+  // };
   return (
     <div
       id="about"
@@ -79,14 +80,19 @@ const About = () => {
                 </div>
               </Dialog>
             </Transition>
-            <Button
-              text="get resume"
-              className="capitalize flex items-center gap-2"
-              icon={<PiDownloadSimple />}
-              onClick={() => {
-                downloadFileAtUrl(PDF_FILE_URL);
-              }}
-            />
+            <Link
+              to="https://drive.google.com/file/d/1NrDqwMne4B0Rvxpw1z1kr3DwtPzg8wmS/view?usp=drive_link"
+              target="_blank"
+            >
+              <Button
+                text="get resume"
+                className="capitalize flex items-center gap-2"
+                icon={<PiDownloadSimple />}
+                // onClick={() => {
+                //   downloadFileAtUrl(PDF_FILE_URL);
+                // }}
+              />
+            </Link>
           </div>
           <div className="flex flex-col gap-7">
             <div className="flex flex-col md:max-lg:items-center gap-4">

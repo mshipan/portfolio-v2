@@ -2,8 +2,22 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
+import { useGetAboutMeQuery } from "../../redux/features/api/baseApi";
 
 const AboutMe = () => {
+  const { data: aboutMe, isLoading, isError } = useGetAboutMeQuery();
+
+  if (isLoading) {
+    return <p className="font-poppins text-white text-lg">Loading...</p>;
+  }
+  if (isError) {
+    return (
+      <p className="font-poppins text-[#55e6a5] text-lg">
+        Error Fetching Data...
+      </p>
+    );
+  }
+  console.log("About Me", aboutMe[0]);
   return (
     <div className="h-auto">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
@@ -27,7 +41,7 @@ const AboutMe = () => {
               type="text"
               name="name"
               readOnly
-              value="Shipan"
+              value={aboutMe[0]?.name}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -43,8 +57,8 @@ const AboutMe = () => {
               type="text"
               name="role"
               readOnly
-              value="Front End Web Developer"
-              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+              value={aboutMe[0]?.role}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins capitalize"
             />
           </div>
 
@@ -60,7 +74,7 @@ const AboutMe = () => {
               readOnly
               cols="30"
               rows="5"
-              value="I'm a passionate Web Developer with a knack for creating captivating digital experiences. My skills include HTML5, CSS3, JavaScript, React, Redux, and UI libraries like Tailwind CSS and Bootstrap. On the backend, I excel in Node.js, Express.js, MongoDB, and Firebase. Let's craft user-friendly interfaces that engage and delight users!"
+              value={aboutMe[0]?.about}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
@@ -76,7 +90,7 @@ const AboutMe = () => {
               type="text"
               name="mobile"
               readOnly
-              value="01622543390"
+              value={aboutMe[0]?.mobile}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -92,7 +106,7 @@ const AboutMe = () => {
               type="email"
               name="email"
               readOnly
-              value="shipanmallik95@gmail.com"
+              value={aboutMe[0]?.email}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -108,7 +122,23 @@ const AboutMe = () => {
               type="text"
               name="address"
               readOnly
-              value="Kathaltola, Mirpur 2"
+              value={aboutMe[0]?.address}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="website"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Website:
+            </label>
+            <input
+              type="text"
+              name="website"
+              readOnly
+              value={aboutMe[0]?.website}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -124,7 +154,24 @@ const AboutMe = () => {
               type="text"
               name="maplink"
               readOnly
-              value="<iframe>www.example.com</iframe>"
+              value={aboutMe[0]?.maplink}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="watchTheVideo"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Watch the video Link:
+            </label>
+            <input
+              type="text"
+              name="watchTheVideo"
+              readOnly
+              placeholder="eg. https://www.youtube.com/embed/..."
+              value={aboutMe[0]?.watchTheVideo}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -145,7 +192,7 @@ const AboutMe = () => {
                   type="text"
                   name="facebook"
                   readOnly
-                  value="www.facebook.com"
+                  value={aboutMe[0]?.facebook}
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
               </div>
@@ -157,7 +204,7 @@ const AboutMe = () => {
                   type="text"
                   name="twitter"
                   readOnly
-                  value="www.twitter.com"
+                  value={aboutMe[0]?.twitter}
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
               </div>
@@ -169,7 +216,7 @@ const AboutMe = () => {
                   type="text"
                   name="github"
                   readOnly
-                  value="www.github.com"
+                  value={aboutMe[0]?.github}
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
               </div>
@@ -181,7 +228,7 @@ const AboutMe = () => {
                   type="text"
                   name="linkedin"
                   readOnly
-                  value="www.linkedin.com"
+                  value={aboutMe[0]?.linkedin}
                   className="w-full md:w-[48%] md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
                 />
               </div>

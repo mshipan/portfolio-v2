@@ -8,6 +8,7 @@ import { Fragment, useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaXmark } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const Banner = () => {
     setIsOpen(true);
   }
 
-  const PDF_FILE_URL = "https://portfolio-v2-de4b6.web.app/CV_of_Shipan_Mallik.pdf";
+  // const PDF_FILE_URL = "https://portfolio-v2-de4b6.web.app/CV_of_Shipan_Mallik.pdf";
   useEffect(() => {
     const text = document.querySelector(".text p");
     text.innerHTML = text.innerText
@@ -32,15 +33,15 @@ const Banner = () => {
       .join("");
   }, []);
 
-  const downloadFileAtUrl = (url) => {
-    const fileName = url.split("/").pop();
-    const aTag = document.createElement("a");
-    aTag.href = url;
-    aTag.setAttribute("download", fileName);
-    document.body.appendChild(aTag);
-    aTag.click();
-    aTag.remove();
-  };
+  // const downloadFileAtUrl = (url) => {
+  //   const fileName = url.split("/").pop();
+  //   const aTag = document.createElement("a");
+  //   aTag.href = url;
+  //   aTag.setAttribute("download", fileName);
+  //   document.body.appendChild(aTag);
+  //   aTag.click();
+  //   aTag.remove();
+  // };
 
   return (
     <div className="relative z-0">
@@ -86,15 +87,20 @@ const Banner = () => {
             and Firebase. Let&apos;s craft user-friendly interfaces that engage
             and delight users!
           </p>
-          <div className="flex flex-col sm:max-xl:flex-row md:flex-row items-start md:items-center md:max-xl:justify-center gap-8">
-            <Button
-              text="download cv"
-              className="capitalize flex items-center gap-2"
-              icon={<PiDownloadSimple />}
-              onClick={() => {
-                downloadFileAtUrl(PDF_FILE_URL);
-              }}
-            />
+          <div className="flex flex-col sm:max-xl:flex-row md:flex-row items-start md:items-center md:max-xl:justify-center gap-2">
+            <Link
+              to="https://drive.google.com/file/d/1HoOPu5q0_Ng157TlSFzKO8oEjXfI39yV/view?usp=drive_link"
+              target="_blank"
+            >
+              <Button
+                text="download cv"
+                className="capitalize flex items-center gap-2"
+                icon={<PiDownloadSimple />}
+                onClick={() => {
+                  // downloadFileAtUrl(PDF_FILE_URL);
+                }}
+              />
+            </Link>
 
             <button onClick={openModal} className="flex items-center gap-3">
               <FaPlayCircle className="text-4xl text-[#55e6a5]" />
