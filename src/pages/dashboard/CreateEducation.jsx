@@ -1,21 +1,51 @@
+import { useForm } from "react-hook-form";
 import Button from "../../components/shared/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAddAnEducationMutation } from "../../redux/features/api/education/educationApi";
+import Swal from "sweetalert2";
 
 const CreateEducation = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+
+  const [addEducation] = useAddAnEducationMutation();
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await addEducation(data);
+      if (result.data) {
+        Swal.fire({
+          title: "Education Added Successfully!",
+          text: "Press OK to continue",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        reset();
+        navigate("/dashboard/education");
+      } else {
+        Swal.fire({
+          title: "Education Added Failed!",
+          text: "Press OK to continue",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred", error);
+    }
+  };
   return (
-    <div className="h-screen">
+    <form onSubmit={handleSubmit(onSubmit)} className="h-screen">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
         <h1 className="text-2xl font-notoSans text-[#55e6a5]">
           Create Education Info
         </h1>
         <div>
-          <Link to="/dashboard/update-education">
-            <Button text="Add Education" />
-          </Link>
+          <Button type="submit" text="Add Education" />
         </div>
       </div>
       <div>
-        <form className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5">
           <div className="form-control">
             <label
               htmlFor="title"
@@ -26,7 +56,7 @@ const CreateEducation = () => {
             <input
               type="text"
               name="title"
-              value="Secondary School Certificate"
+              {...register("title")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -41,7 +71,7 @@ const CreateEducation = () => {
             <input
               type="text"
               name="startYear"
-              value="2010"
+              {...register("startYear")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -56,7 +86,7 @@ const CreateEducation = () => {
             <input
               type="text"
               name="endYear"
-              value="2011"
+              {...register("endYear")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -72,13 +102,13 @@ const CreateEducation = () => {
               name="description"
               cols="30"
               rows="5"
-              value="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam pariatur doloribus alias aliquam sunt accusamus asperiores recusandae rem ea ipsum!"
+              {...register("description")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

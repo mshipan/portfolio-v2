@@ -7,8 +7,10 @@ import {
   useUpdateAboutMeMutation,
 } from "../../redux/features/api/aboutMe/aboutMeApi";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const UpdateAboutMe = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [updateAboutMe] = useUpdateAboutMeMutation();
   const { data: aboutMe, isLoading, isError } = useGetAboutMeQuery();
@@ -37,6 +39,7 @@ const UpdateAboutMe = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
+        navigate("/dashboard/about-me");
       }
     } catch (error) {
       console.error("Error updating Info:", error);
