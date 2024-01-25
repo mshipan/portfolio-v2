@@ -1,57 +1,40 @@
 import React from "react";
 import Button from "../shared/Button";
 import { useForm } from "react-hook-form";
-import {
-  useGetSkillByIdQuery,
-  useUpdateSkillMutation,
-} from "../../redux/features/api/skill/skillApi";
+import { useAddASkillMutation } from "../../redux/features/api/skill/skillApi";
 import Swal from "sweetalert2";
 
-const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
-  const { register, handleSubmit } = useForm();
-  const [updateSkill] = useUpdateSkillMutation();
-  const {
-    data: singleSkill,
-    isLoading,
-    isError,
-  } = useGetSkillByIdQuery(skill._id);
-
-  if (isLoading) {
-    return <p className="font-poppins text-white text-lg">Loading...</p>;
-  }
-
-  if (isError) {
-    return (
-      <p className="font-poppins text-[#55e6a5] text-lg">
-        Error Fetching Data...
-      </p>
-    );
-  }
-
-  const { _id, skillName, skillPercentage } = singleSkill;
+const CreateSkillModal = ({ isModalOpen, closeModal }) => {
+  const { register, handleSubmit, reset } = useForm();
+  const [createSkill] = useAddASkillMutation();
 
   const onSubmit = async (data) => {
     try {
-      const result = await updateSkill({
-        id: _id,
-        data: data,
-      });
-      if (result.data.modifiedCount > 0) {
+      const result = await createSkill(data);
+      if (result.data) {
         Swal.fire({
-          title: "Skill Updated Successfully!",
+          title: "Skill Added Successfully!",
           text: "Press OK to continue",
           icon: "success",
           confirmButtonText: "OK",
         });
+        reset();
+      } else {
+        Swal.fire({
+          title: "Skill Added Failed!",
+          text: "Press OK to continue",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     } catch (error) {
-      console.error("Error updating education:", error);
+      console.error("An unexpected error occurred", error);
     }
   };
   return (
     <dialog
-      open={isSkillModalOpen}
-      className="modal modal-middle sm:modal-middle"
+      open={isModalOpen}
+      className="modal modal-middle sm:modal-middle z-10"
     >
       <div className="modal-box">
         <form method="dialog">
@@ -64,7 +47,7 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
           </button>
         </form>
         <h3 className="font-bold text-lg font-notoSans text-[#55e6a5]">
-          Update Skill
+          Create Skill
         </h3>
         <div>
           <form
@@ -79,7 +62,6 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
                 type="text"
                 name="skillName"
                 {...register("skillName")}
-                defaultValue={skillName}
                 placeholder="Your Skill Name"
                 className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
               />
@@ -95,7 +77,6 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
                 type="number"
                 name="skillPercentage"
                 {...register("skillPercentage")}
-                defaultValue={skillPercentage}
                 max="100"
                 min="0"
                 placeholder="Your Skill Percentage"
@@ -104,9 +85,9 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
             </div>
             <div>
               <Button
-                onClick={closeModal}
-                text="Update Skill"
+                text="Create Skill"
                 type="submit"
+                onClick={closeModal}
               ></Button>
             </div>
           </form>
@@ -116,4 +97,4 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
   );
 };
 
-export default UpdateSkillModal;
+export default CreateSkillModal;
