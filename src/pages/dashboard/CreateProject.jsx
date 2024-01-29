@@ -1,17 +1,24 @@
 import { useState } from "react";
 import Button from "../../components/shared/Button";
 import CreatableSelect from "react-select/creatable";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { BsPlus } from "react-icons/bs";
 import { FaXmark } from "react-icons/fa6";
+import { useAddAProjectMutation } from "../../redux/features/api/project/projectApi";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
+  const navigate = useNavigate();
+  const image_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+  const [bannerImage, setBannerImage] = useState(null);
+  const [bgImage, setBgImage] = useState(null);
   const { register, control, handleSubmit, reset } = useForm();
   const [selectedTechnologyUsed, setSelectedTechnologyUsed] = useState(null);
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "tourGallery",
+    name: "projectFeatures",
   });
   const technologyUsedOptions = [
     { value: "html5", label: "HTML5" },
@@ -74,24 +81,91 @@ const CreateProject = () => {
       },
     }),
   };
+
+  const [addProject, { isError, error }] = useAddAProjectMutation();
+
+  if (isError) {
+    console.error("Error adding project:", error);
+  }
+
+  const img_host_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
+
+  const bannerSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("key", image_hosting_token);
+    formData.append("image", data.projectBanner[0]);
+
+    fetch(img_host_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        setBannerImage(imgResponse?.data?.display_url);
+      });
+  };
+  const bgSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("key", image_hosting_token);
+    formData.append("image", data.projectBg[0]);
+
+    fetch(img_host_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        setBgImage(imgResponse?.data?.display_url);
+      });
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const bannerResponse = await bannerSubmit(data);
+      const bgResponse = await bgSubmit(data);
+
+      if (bannerImage && bgImage) {
+        data.projectBanner = bannerImage;
+        data.projectBg = bgImage;
+
+        const result = await addProject(data);
+        if (result.data) {
+          Swal.fire({
+            title: "Project Added Successfully!",
+            text: "Press OK to continue",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          reset();
+          navigate("/dashboard/projects");
+        } else {
+          Swal.fire({
+            title: "Project Added Failed!",
+            text: "Press OK to continue",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred", error);
+    }
+  };
+
   return (
-    <div className="h-auto md:h-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="h-auto md:h-auto">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
         <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-full md:max-xl:w-full">
           <h1 className="text-2xl font-notoSans text-[#55e6a5]">
             Create Project
           </h1>
           <div>
-            <Button
-              onClick={() => document.getElementById("my_modal_5").showModal()}
-              text="Create Project"
-            />{" "}
-            {/* modal */}
+            <Button text="Create Project" type="submit" />
           </div>
         </div>
       </div>
       <div>
-        <form className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5">
           <div className="form-control">
             <label
               htmlFor="projectTitle"
@@ -102,6 +176,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="projectTitle"
+              {...register("projectTitle")}
               placeholder="Project Title eg. Chemistry Corner 1"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -114,10 +189,11 @@ const CreateProject = () => {
             >
               Project Banner:
             </label>
+
             <input
-              type="text"
               name="projectBanner"
-              placeholder="Project Details Banner Image link"
+              {...register("projectBanner")}
+              type="file"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -129,10 +205,11 @@ const CreateProject = () => {
             >
               Project Bg:
             </label>
+
             <input
-              type="text"
               name="projectBg"
-              placeholder="Long Page Screenshot link"
+              {...register("projectBg")}
+              type="file"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -146,6 +223,7 @@ const CreateProject = () => {
             </label>
             <textarea
               name="projectDescription"
+              {...register("projectDescription")}
               cols="30"
               rows="5"
               placeholder="Project Description..."
@@ -162,6 +240,7 @@ const CreateProject = () => {
             </label>
             <textarea
               name="projectGoals"
+              {...register("projectGoals")}
               cols="30"
               rows="5"
               placeholder="Project Goals..."
@@ -176,19 +255,24 @@ const CreateProject = () => {
             >
               Technology Used :{" "}
             </label>
-            <CreatableSelect
+            <Controller
               name="technologyUsed"
+              control={control}
               defaultValue={selectedTechnologyUsed}
-              onChange={setSelectedTechnologyUsed}
-              options={technologyUsedOptions}
-              isMulti
-              className="w-full md:w-1/2 md:max-xl:w-full"
-              styles={customStyles}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-              })}
-            ></CreatableSelect>
+              render={({ field }) => (
+                <CreatableSelect
+                  {...field}
+                  options={technologyUsedOptions}
+                  isMulti
+                  className="w-full md:w-1/2 md:max-xl:w-full"
+                  styles={customStyles}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                  })}
+                />
+              )}
+            />
           </div>
 
           <div className="form-control">
@@ -246,6 +330,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="projectDuration"
+              {...register("projectDuration")}
               placeholder="Project Duration eg. 15 days (need a calculation)"
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -261,6 +346,7 @@ const CreateProject = () => {
             <input
               type="date"
               name="startDate"
+              {...register("startDate")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -275,6 +361,7 @@ const CreateProject = () => {
             <input
               type="date"
               name="endDate"
+              {...register("endDate")}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -289,6 +376,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="liveLink"
+              {...register("liveLink")}
               placeholder="Project Live Link..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -304,6 +392,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="githubClient"
+              {...register("githubClient")}
               placeholder="Github Client Site Repository..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -319,6 +408,7 @@ const CreateProject = () => {
             <input
               type="text"
               name="githubServer"
+              {...register("githubServer")}
               placeholder="Github Server Site Repository..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
@@ -333,15 +423,16 @@ const CreateProject = () => {
             </label>
             <textarea
               name="conclusion"
+              {...register("conclusion")}
               cols="30"
               rows="5"
               placeholder="Project Conclution..."
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             ></textarea>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 
