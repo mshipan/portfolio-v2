@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loading: isLoading } = useContext(AuthContext);
   const from = location.state?.from?.pathname || "/";
   const {
     register,
@@ -75,7 +75,7 @@ const LoginPage = () => {
                 />
               </div>
               <div className="mt-4">
-                <Button type="submit" text="Login" />
+                <Button type="submit"  text={isLoading ? "Logging in" : "Login"} loading={isLoading} loadingSpinner={<span className="loading loading-spinner loading-sm"></span>} />
               </div>
               <p style={{ color: "red" }}>{errorMessage}</p>
             </form>

@@ -22,14 +22,14 @@ const DashboardNav = () => {
   const userMenuDropdown = (
     <>
       <li>
-        <button onClick={handleLogout}>Log Out</button>
+        <button onClick={handleLogout} className="text-white">Log Out</button>
       </li>
     </>
   );
   return (
     <div className="bg-[#0c172b] h-16 flex items-center justify-end p-4">
       <div onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}>
-        <PiUserCircleLight size={40} className="cursor-pointer" />
+        <PiUserCircleLight size={40} className="cursor-pointer text-gray-300" />
       </div>
       <div className="">
         <ul

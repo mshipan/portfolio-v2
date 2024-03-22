@@ -6,8 +6,24 @@ import { CiCircleChevRight } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useEffect, useState } from "react";
+import { useGetAboutMeQuery } from "../../redux/features/api/aboutMe/aboutMeApi";
 
 const MyDashboard = () => {
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { data: aboutMe } = useGetAboutMeQuery();
+
   const tileClassName = ({ date }) => {
     // Check if the day is Friday (5 is the index for Friday)
     if (date.getDay() === 5) {
@@ -27,11 +43,14 @@ const MyDashboard = () => {
     <div className="h-auto md:h-screen">
       <div className="flex flex-col gap-3 md:gap-0 mb-5 justify-between w-full md:max-xl:w-full">
         <div className=" mb-5 w-full md:w-full md:max-xl:w-full flex items-baseline justify-between">
-          <h1 className="font-notoSans text-3xl text-[#55e6a5]">Dashboard</h1>
+          <div className="flex flex-col items-center md:items-start">
+            <h1 className="font-notoSans text-3xl text-[#55e6a5]">Dashboard</h1>
+            <span className="text-white">{currentTime}</span>
+          </div>
           <h1 className="text-xl font-notoSans text-[#55e6a5]">
             Wellcome Back,{" "}
             <span className="font-poppins text-white font-bold">
-              Shipan Mallik.
+              {aboutMe[0].name}.
             </span>
           </h1>
         </div>
@@ -217,10 +236,10 @@ const MyDashboard = () => {
         </div>
       </div>
       <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box bg-[#141c27]">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white bg-gray-600">
               ✕
             </button>
           </form>

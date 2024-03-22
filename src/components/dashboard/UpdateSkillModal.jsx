@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
   const { register, handleSubmit } = useForm();
-  const [updateSkill] = useUpdateSkillMutation();
+  const [updateSkill, { isLoading: updateLoading }] = useUpdateSkillMutation();
   const {
     data: singleSkill,
     isLoading,
@@ -20,7 +20,7 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
     return <p className="font-poppins text-white text-lg">Loading...</p>;
   }
 
-  if (isError) {
+  if (isError || !singleSkill) {
     return (
       <p className="font-poppins text-[#55e6a5] text-lg">
         Error Fetching Data...
@@ -53,12 +53,12 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
       open={isSkillModalOpen}
       className="modal modal-middle sm:modal-middle"
     >
-      <div className="modal-box">
+      <div className="modal-box bg-[#141c27]">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button
             onClick={closeModal}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white bg-gray-600"
           >
             ✕
           </button>
@@ -81,7 +81,7 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
                 {...register("skillName")}
                 defaultValue={skillName}
                 placeholder="Your Skill Name"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 text-zinc-300 outline-none"
               />
             </div>
             <div className="form-control">
@@ -99,13 +99,17 @@ const UpdateSkillModal = ({ isSkillModalOpen, closeModal, skill }) => {
                 max="100"
                 min="0"
                 placeholder="Your Skill Percentage"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 text-zinc-300 outline-none"
               />
             </div>
             <div>
               <Button
                 onClick={closeModal}
-                text="Update Skill"
+                text={updateLoading ? "Updating" : "Update Skill"}
+                loadingSpinner={
+                  <span className="loading loading-spinner loading-sm"></span>
+                }
+                loading={updateLoading}
                 type="submit"
               ></Button>
             </div>

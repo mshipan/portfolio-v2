@@ -36,12 +36,12 @@ const CreateSkillModal = ({ isModalOpen, closeModal }) => {
       open={isModalOpen}
       className="modal modal-middle sm:modal-middle z-10"
     >
-      <div className="modal-box">
+      <div className="modal-box bg-[#141c27]">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button
             onClick={closeModal}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white bg-gray-600"
           >
             ✕
           </button>
@@ -63,7 +63,7 @@ const CreateSkillModal = ({ isModalOpen, closeModal }) => {
                 name="skillName"
                 {...register("skillName")}
                 placeholder="Your Skill Name"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 text-zinc-300 outline-none"
               />
             </div>
             <div className="form-control">
@@ -80,7 +80,7 @@ const CreateSkillModal = ({ isModalOpen, closeModal }) => {
                 max="100"
                 min="0"
                 placeholder="Your Skill Percentage"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 text-zinc-300 outline-none"
               />
             </div>
             <div>
