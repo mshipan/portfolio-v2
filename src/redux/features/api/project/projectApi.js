@@ -2,9 +2,13 @@ import baseApi from "../baseApi";
 
 const projectApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllProjects: builder.query({
+      query: () => "/projects",
+      providesTags: ["project"],
+    }),
     AddAProject: builder.mutation({
       query: (data) => ({
-        url: "/addprojects",
+        url: "/projects",
         method: "POST",
         body: data,
       }),
@@ -13,4 +17,4 @@ const projectApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddAProjectMutation } = projectApi;
+export const { useGetAllProjectsQuery, useAddAProjectMutation } = projectApi;

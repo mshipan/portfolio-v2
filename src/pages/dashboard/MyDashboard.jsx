@@ -50,7 +50,7 @@ const MyDashboard = () => {
           <h1 className="text-xl font-notoSans text-[#55e6a5]">
             Wellcome Back,{" "}
             <span className="font-poppins text-white font-bold">
-              {aboutMe[0].name}.
+              {aboutMe?.[0].name}.
             </span>
           </h1>
         </div>
