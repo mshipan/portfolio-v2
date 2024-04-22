@@ -92,7 +92,7 @@ const router = createBrowserRouter([
         element: <CreateProject />,
       },
       {
-        path: "/dashboard/update-project",
+        path: "/dashboard/update-project/:id",
         element: <UpdateProject />,
       },
       {

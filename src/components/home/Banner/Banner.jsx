@@ -192,7 +192,7 @@ const Banner = () => {
               </div>
               <div className="absolute z-50">
                 <img
-                  src={myImg}
+                  src="https://i.ibb.co/DbPsQ4q/me.png"
                   alt="My Image"
                   className="xl:max-2xl:w-80 w-[30rem] sm:max-xl:w-[25rem]"
                 />
