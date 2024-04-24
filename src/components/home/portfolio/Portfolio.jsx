@@ -68,19 +68,6 @@ const Portfolio = () => {
                 <ProjectCard project={project} />
               </SwiperSlide>
             ))}
-
-            {/* <SwiperSlide>
-              <ProjectCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProjectCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProjectCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProjectCard />
-            </SwiperSlide> */}
           </Swiper>
         </div>
       </div>

@@ -4,12 +4,12 @@ import userImg from "../assets/user.jpg";
 import { AiFillLike } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
 
-const BlogCard = () => {
+const BlogCard = ({ blog }) => {
   return (
     <div className="w-80 xl:max-2xl:w-80">
       <div className="overflow-hidden bg-cover bg-no-repeat rounded-t-lg">
         <img
-          src={blogImg}
+          src={blog?.blogBanner}
           alt="Blog Image"
           className="transition duration-300 ease-in-out hover:scale-110"
         />
@@ -17,29 +17,28 @@ const BlogCard = () => {
       <div className="relative bg-zinc-900 rounded-b-lg">
         <div className="flex items-center justify-center absolute -top-6 left-0 right-0">
           <div className="bg-[#55e6a5] py-3 px-5">
-            <h1 className="text-black font-poppins">18 Nov 2023</h1>
+            <h1 className="text-black font-poppins">{blog?.createdAt}</h1>
           </div>
         </div>
         <div className="pt-10 px-4">
-          <Link to="/blog">
+          <Link to={`/blog/${blog?._id}`}>
             <h1 className="text-white text-xl font-semibold font-notoSans hover:underline">
-              Don't wait until you officially started
+              {blog?.blogTitle}
             </h1>
           </Link>
           <p className="text-zinc-400 font-poppins text-sm py-3 text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-            adipisci perferendis tempora.
+            {blog?.blogDescription.slice(0, 80)}...
           </p>
 
           <div className="flex items-center justify-between py-3 border-t border-zinc-400">
             <div className="flex items-center gap-3">
               <img
-                src={userImg}
+                src={blog?.authorImage}
                 alt="user image"
                 className="w-8 h-8 rounded-full"
               />
               <h1 className="font-poppins text-white">
-                by <span className="capitalize">shipan</span>
+                by <span className="capitalize">{blog?.authorName}</span>
               </h1>
             </div>
             <div className="flex items-center gap-4">
