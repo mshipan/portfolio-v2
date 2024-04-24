@@ -45,7 +45,7 @@ const ProjectsOnDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-1/2 md:max-xl:w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-[85%] md:max-xl:w-full">
         {allProjects?.map((project) => (
           <div
             key={project?._id}

@@ -3,18 +3,30 @@ import projectBannerImg from "../../assets/projectBanner.jpg";
 import { TfiCheck } from "react-icons/tfi";
 import { LuClock } from "react-icons/lu";
 import { SlCalender } from "react-icons/sl";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../components/shared/Button";
+import { useGetProjectByIdQuery } from "../../redux/features/api/project/projectApi";
 
 const ProjectDetails = () => {
+  const { id } = useParams();
+  const { data: singleProject } = useGetProjectByIdQuery(id);
+
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
+    const options = { day: "2-digit", month: "short", year: "numeric" };
+    return dateObj.toLocaleDateString("en-GB", options);
+  };
   return (
     <div>
-      <PageBanner title="Project Details" subTitle="Chemistry Corner 1" />
+      <PageBanner
+        title="Project Details"
+        subTitle={singleProject?.projectTitle}
+      />
       <div className="md:mt-32 mt-20 mb-20 md:w-3/5 w-full text-center md:text-left mx-auto ">
         <div className="flex flex-col gap-10 w-[98%] md:w-full mx-auto">
           <div>
             <img
-              src={projectBannerImg}
+              src={singleProject?.projectBanner}
               alt="Project Banner"
               className="w-full h-60 md:h-[40rem] md:max-xl:h-80 rounded-xl"
             />
@@ -29,21 +41,14 @@ const ProjectDetails = () => {
                   <h1 className="text-4xl font-notoSans text-white">
                     Project Description
                   </h1>
-                  <p className="text-sm text-zinc-500 font-poppins">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nobis ab aperiam laudantium perferendis ducimus recusandae
-                    asperiores, magnam sit repudiandae blanditiis voluptates
-                    itaque corporis nulla reiciendis cupiditate dolore odio quam
-                    debitis.
+                  <p className="text-sm text-zinc-300 font-poppins">
+                    {singleProject?.projectDescription}
                   </p>
                 </div>
                 <div className="flex flex-col gap-3">
                   <h1 className="text-4xl font-notoSans text-white">Goals</h1>
-                  <p className="text-sm text-zinc-500 font-poppins">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Esse magnam consequuntur praesentium nam repudiandae, ea
-                    quia reiciendis repellat, alias ad obcaecati aut eligendi
-                    dolorum rem, quisquam laudantium ipsam tenetur quos?
+                  <p className="text-sm text-zinc-300 font-poppins">
+                    {singleProject?.projectGoals}
                   </p>
                 </div>
               </div>
@@ -52,51 +57,13 @@ const ProjectDetails = () => {
                   2. Technologies Used
                 </h1>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      Tailwind Css
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      React
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      node.js
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      express.js
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      mongoDB
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      firebase
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      redux
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      tanstack query
-                    </p>
-                  </div>
-                  <div className="py-3 px-2 border border-[#55e6a5]">
-                    <p className="text-white font-poppins capitalize text-center">
-                      socket.io
-                    </p>
-                  </div>
+                  {singleProject?.technologyUsed?.map((techUse, i) => (
+                    <div key={i} className="py-3 px-2 border border-[#55e6a5]">
+                      <p className="text-white font-poppins capitalize text-center">
+                        {techUse?.label}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="flex flex-col gap-5">
@@ -104,41 +71,14 @@ const ProjectDetails = () => {
                   3. Features
                 </h1>
                 <div className="flex flex-col gap-3">
-                  <div className="flex md:items-center gap-3">
-                    <TfiCheck className="text-[#55e6a5]" />
-                    <p className="font-poppins text-sm text-zinc-500 text-left">
-                      User-friendly registration and login for easy profile
-                      creation and management.
-                    </p>
-                  </div>
-                  <div className="flex md:items-center gap-3">
-                    <TfiCheck className="text-[#55e6a5]" />
-                    <p className="font-poppins text-sm text-zinc-500 text-left">
-                      User-friendly registration and login for easy profile
-                      creation and management.
-                    </p>
-                  </div>
-                  <div className="flex md:items-center gap-3">
-                    <TfiCheck className="text-[#55e6a5]" />
-                    <p className="font-poppins text-sm text-zinc-500 text-left">
-                      User-friendly registration and login for easy profile
-                      creation and management.
-                    </p>
-                  </div>
-                  <div className="flex md:items-center gap-3">
-                    <TfiCheck className="text-[#55e6a5]" />
-                    <p className="font-poppins text-sm text-zinc-500 text-left">
-                      User-friendly registration and login for easy profile
-                      creation and management.
-                    </p>
-                  </div>
-                  <div className="flex md:items-center gap-3">
-                    <TfiCheck className="text-[#55e6a5]" />
-                    <p className="font-poppins text-sm text-zinc-500 text-left">
-                      User-friendly registration and login for easy profile
-                      creation and management.
-                    </p>
-                  </div>
+                  {singleProject?.projectFeatures?.map((pFeature, i) => (
+                    <div key={i} className="flex md:items-center gap-3">
+                      <TfiCheck className="text-[#55e6a5]" />
+                      <p className="font-poppins text-sm text-zinc-300 text-left">
+                        {pFeature.feature}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="flex flex-col gap-5">
@@ -146,17 +86,8 @@ const ProjectDetails = () => {
                   4. conclusion
                 </h1>
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm text-zinc-500 font-poppins">
-                    Chemistry Corner is poised to reshape the online dating
-                    landscape by offering a feature-rich platform that
-                    prioritizes user experience and security. With a focus on
-                    meaningful matches, real-time communication, and user
-                    privacy, this project aims to create a safe and engaging
-                    space for users to forge authentic connections. By
-                    incorporating advanced features, fostering user feedback,
-                    and embracing innovation, Chemistry Corner aspires to become
-                    a cornerstone in the journey of finding genuine
-                    relationships online.
+                  <p className="text-sm text-zinc-300 font-poppins">
+                    {singleProject?.conclusion}
                   </p>
                 </div>
               </div>
@@ -170,7 +101,7 @@ const ProjectDetails = () => {
                     </h1>
                     <p className="text-white inline-flex items-center gap-2">
                       <LuClock className="text-lg" />
-                      15 Days
+                      {singleProject?.projectDuration}
                     </p>
                   </div>
                   <div>
@@ -180,14 +111,14 @@ const ProjectDetails = () => {
                           className="text-white text-lg
                       "
                         />
-                        Start Date: 21 Nov 2023
+                        Start Date: {formatDate(singleProject?.startDate)}
                       </h1>
                       <h1 className="text-zinc-400 inline-flex items-center gap-2">
                         <SlCalender
                           className="text-white text-lg
                       "
                         />
-                        End Date: 25 Nov 2023
+                        End Date: {formatDate(singleProject?.endDate)}
                       </h1>
                     </div>
                   </div>
@@ -197,9 +128,9 @@ const ProjectDetails = () => {
                     <h1 className="text-lg font-poppins font-bold text-[#55e6a5]">
                       Live Link
                     </h1>
-                    <Link to="">
-                      <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5]">
-                        www.example.com
+                    <Link to={singleProject?.liveLink}>
+                      <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5] underline italic">
+                        go to the live link
                       </p>
                     </Link>
                   </div>
@@ -216,9 +147,9 @@ const ProjectDetails = () => {
                             Client
                           </h1>
                         </div>
-                        <Link to="">
-                          <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5]">
-                            www.example.com
+                        <Link to={singleProject?.githubClient}>
+                          <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5] underline italic">
+                            go to the github-client link
                           </p>
                         </Link>
                       </div>
@@ -228,9 +159,9 @@ const ProjectDetails = () => {
                             Server
                           </h1>
                         </div>
-                        <Link to="">
-                          <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5]">
-                            www.example.com
+                        <Link to={singleProject?.githubServer}>
+                          <p className="text-white inline-flex items-center gap-2 hover:text-[#55e6a5] underline italic">
+                            go to the github-server link
                           </p>
                         </Link>
                       </div>
@@ -244,7 +175,7 @@ const ProjectDetails = () => {
                   <p className="text-xl text-white font-bold font-notoSans">
                     Need This Kind of Project!
                   </p>
-                  <p className="font-poppins text-sm mt-5 mb-3">
+                  <p className="font-poppins text-sm mt-5 mb-3 text-gray-400">
                     Contact me at my address or click the contact button.
                     I&apos;m always there for you 24/7.
                   </p>

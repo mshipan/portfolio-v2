@@ -7,8 +7,10 @@ import { BsPlus } from "react-icons/bs";
 import { FreeMode } from "swiper/modules";
 import { Link } from "react-router-dom";
 import ProjectCard from "../../ProjectCard";
+import { useGetAllProjectsQuery } from "../../../redux/features/api/project/projectApi";
 
 const Portfolio = () => {
+  const { data: allProjects } = useGetAllProjectsQuery();
   return (
     <div
       id="projects"
@@ -61,7 +63,13 @@ const Portfolio = () => {
             }}
             className="mySwiper"
           >
-            <SwiperSlide>
+            {allProjects?.map((project) => (
+              <SwiperSlide key={project?._id}>
+                <ProjectCard project={project} />
+              </SwiperSlide>
+            ))}
+
+            {/* <SwiperSlide>
               <ProjectCard />
             </SwiperSlide>
             <SwiperSlide>
@@ -72,10 +80,7 @@ const Portfolio = () => {
             </SwiperSlide>
             <SwiperSlide>
               <ProjectCard />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ProjectCard />
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </div>
       </div>
