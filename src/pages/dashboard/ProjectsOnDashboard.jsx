@@ -58,7 +58,7 @@ const ProjectsOnDashboard = () => {
               <div className="flex items-center gap-1 text-lg">
                 <CiStopwatch className="text-[#55e6a5] text-2xl" />
                 <p className="font-poppins text-slate-400">
-                  {project?.projectDuration} days
+                  {project?.projectDuration}
                 </p>
               </div>
             </div>
