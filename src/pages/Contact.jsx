@@ -1,7 +1,43 @@
+import { useState } from "react";
 import Button from "../components/shared/Button";
 import PageBanner from "../components/shared/PageBanner";
+import { useForm } from "react-hook-form";
+import { useSendEmailMutation } from "../redux/features/api/contact/contactApi";
+import toast from "react-hot-toast";
+import checkGif from "../assets/check.gif";
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+  const [sentText, setSentText] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const [sendEmail] = useSendEmailMutation();
+  const onSubmit = async (data) => {
+    try {
+      setLoading(true);
+      const result = await sendEmail(data);
+
+      // Show toast based on response
+      if (result.data) {
+        reset();
+        setLoading(false);
+        toast.success("Message sent successfully.");
+        setSentText(true);
+        setTimeout(() => {
+          setSentText(false);
+        }, 1500);
+      } else {
+        toast.error("Failed to send message.");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(`An error occurred: ${error}`);
+    }
+  };
   return (
     <div>
       <PageBanner title="Contact Me" subTitle="my contact info" />
@@ -48,14 +84,45 @@ const Contact = () => {
               <h1 className="text-white text-4xl font-notoSans md:max-xl:text-center">
                 If you have any project or need help. Feel free to Contact me...
               </h1>
+              <div>
+                {errors.name && (
+                  <p className="text-yellow-500 text-xs font-notoSans">
+                    Name is Required **
+                  </p>
+                )}
+                {errors.email && (
+                  <p className="text-yellow-500 text-xs font-notoSans">
+                    Email is Required **
+                  </p>
+                )}
+                {errors.phone && (
+                  <p className="text-yellow-500 text-xs font-notoSans">
+                    Phone is Required **
+                  </p>
+                )}
+                {errors.subject && (
+                  <p className="text-yellow-500 text-xs font-notoSans">
+                    Subject is Required **
+                  </p>
+                )}
+                {errors.comment && (
+                  <p className="text-yellow-500 text-xs font-notoSans">
+                    Comment is Required **
+                  </p>
+                )}
+              </div>
               <div className="mt-10">
-                <form className="flex flex-col gap-5">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col gap-5"
+                >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="form-control">
                       <input
                         type="text"
                         name="name"
-                        placeholder="Name"
+                        {...register("name", { required: true })}
+                        placeholder="Your Name"
                         className="py-3 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-white"
                       />
                     </div>
@@ -63,7 +130,8 @@ const Contact = () => {
                       <input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        {...register("email", { required: true })}
+                        placeholder="Your Email"
                         className="py-3 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-white"
                       />
                     </div>
@@ -71,7 +139,8 @@ const Contact = () => {
                       <input
                         type="text"
                         name="phone"
-                        placeholder="Phone"
+                        {...register("phone", { required: true })}
+                        placeholder="Your Phone"
                         className="py-3 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-white"
                       />
                     </div>
@@ -79,6 +148,7 @@ const Contact = () => {
                       <input
                         type="text"
                         name="subject"
+                        {...register("subject", { required: true })}
                         placeholder="Subject"
                         className="py-3 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-white"
                       />
@@ -86,6 +156,8 @@ const Contact = () => {
                     <div className="form-control md:col-span-2">
                       <textarea
                         name="comment"
+                        {...register("comment", { required: true })}
+                        placeholder="Type your comments here..."
                         cols="30"
                         rows="10"
                         className="py-3 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-white"
@@ -93,7 +165,25 @@ const Contact = () => {
                     </div>
                   </div>
                   <Button
-                    text="submit message"
+                    text={
+                      loading ? (
+                        <div className="flex items-center justify-center gap-1">
+                          <span className="loading loading-spinner loading-sm"></span>
+                          <span>Sending...</span>
+                        </div>
+                      ) : sentText ? (
+                        <div className="flex items-center justify-center gap-1">
+                          <img
+                            src={checkGif}
+                            alt="Sent GIF"
+                            className="w-5 h-5"
+                          />
+                          <span>Mail sent.</span>
+                        </div>
+                      ) : (
+                        "Send Mail"
+                      )
+                    }
                     type="submit"
                     className="flex items-center justify-center gap-1 capitalize w-full"
                   />
