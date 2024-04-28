@@ -1,6 +1,38 @@
 import React from "react";
+import {
+  useDeleteANewsLetterMutation,
+  useGetAllNewsLettersQuery,
+} from "../../redux/features/api/newsLetter/newsLetterApi";
+import Swal from "sweetalert2";
 
 const NewsLetters = () => {
+  const { data: allNewsLetters } = useGetAllNewsLettersQuery();
+  const [deleteANewsLetter] = useDeleteANewsLetterMutation();
+  const handleDeleteANewsLetter = async (_id) => {
+    Swal.fire({
+      title: "Are you sure to Delete this?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await deleteANewsLetter({ id: _id });
+          if (result.data.deletedCount > 0) {
+            Swal.fire(
+              "Deleted!",
+              "This newsletter email has been deleted.",
+              "success"
+            );
+          }
+        } catch (error) {
+          console.error("error deleting newsletter email", error);
+        }
+      }
+    });
+  };
   return (
     <div className="h-screen md:h-screen">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
@@ -23,19 +55,26 @@ const NewsLetters = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border border-[#55e6a5]">
-                  <td className="font-poppins text-slate-400 text-sm">1</td>
+                {allNewsLetters?.map((newsLetter, i) => (
+                  <tr key={newsLetter?._id} className="border border-[#55e6a5]">
+                    <td className="font-poppins text-slate-400 text-sm">
+                      {i + 1}
+                    </td>
 
-                  <td className="font-poppins text-slate-400 text-xs">
-                    mshipan657@gmail.com
-                  </td>
+                    <td className="font-poppins text-slate-400 text-xs">
+                      {newsLetter?.email}
+                    </td>
 
-                  <td className="font-poppins text-slate-400 text-xs">
-                    <button className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]">
-                      delete
-                    </button>
-                  </td>
-                </tr>
+                    <td className="font-poppins text-slate-400 text-xs">
+                      <button
+                        onClick={() => handleDeleteANewsLetter(newsLetter?._id)}
+                        className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]"
+                      >
+                        delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

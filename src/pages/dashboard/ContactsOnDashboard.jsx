@@ -1,4 +1,64 @@
+import { useState } from "react";
+import {
+  useDeleteAContactMutation,
+  useGetAllContactsQuery,
+  useUpdateIsNewStatusOnContactMutation,
+} from "../../redux/features/api/contact/contactApi";
+import ViewContactModal from "../../components/dashboard/ViewContactModal";
+import Swal from "sweetalert2";
+
 const ContactsOnDashboard = () => {
+  const [selectedContactId, setSelectedContactId] = useState(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isContactModalClose, setIsContactModalClose] = useState(false);
+
+  const { data: allContacts } = useGetAllContactsQuery();
+  const [deleteAContact] = useDeleteAContactMutation();
+  const [updateIsNewStatus] = useUpdateIsNewStatusOnContactMutation();
+
+  const markContactAsViewed = async (contactId) => {
+    try {
+      await updateIsNewStatus({ id: contactId, isNew: false });
+    } catch (error) {
+      throw new Error("Failed to mark contact as viewed");
+    }
+  };
+
+  const openContactModal = async (contactId) => {
+    setIsContactModalOpen(true);
+    setSelectedContactId(contactId);
+    try {
+      await markContactAsViewed(contactId);
+    } catch (error) {
+      console.error("Error marking contact as viewed:", error);
+    }
+  };
+  const closeContactModal = () => {
+    setIsContactModalClose(true);
+    setSelectedContactId(null);
+  };
+  const handleDeleteAContact = async (_id) => {
+    Swal.fire({
+      title: "Are you sure to Delete this?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await deleteAContact({ id: _id });
+          if (result.data.deletedCount > 0) {
+            Swal.fire("Deleted!", "This contact has been deleted.", "success");
+          }
+        } catch (error) {
+          console.error("error deleting contact", error);
+        }
+      }
+    });
+  };
+
   return (
     <div className="h-auto md:h-screen">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
@@ -22,141 +82,59 @@ const ContactsOnDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border border-[#55e6a5]">
-                  <td className="font-poppins text-slate-400 text-sm">1</td>
-                  <td className="font-poppins text-slate-400 text-xs">
-                    I have a query...
-                  </td>
-                  <td className="font-poppins text-slate-400 text-xs">
-                    Shipan...
-                  </td>
-                  <td className="font-poppins text-slate-400 text-xs">
-                    mshipan65...
-                  </td>
-                  <td className="font-poppins text-slate-400">01622543390</td>
-                  <td className="font-poppins text-slate-400 text-xs">
-                    Lorem ipsum...
-                  </td>
-                  <td className="font-poppins text-slate-400 text-xs">
-                    <div className="flex items-center gap-1">
-                      <button
-                        onClick={() =>
-                          document.getElementById("my_modal_5").showModal()
-                        }
-                        className=" p-1 bg-[#55e6a5] hover:bg-[#141c27] text-black hover:text-[#55e6a5] border border-[#55e6a5]"
-                      >
-                        view
-                      </button>
-                      <button className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]">
-                        delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {allContacts?.map((contact, i) => (
+                  <tr
+                    key={contact?._id}
+                    className={`border border-[#55e6a5] ${
+                      contact.isNew ? "font-bold text-white" : "text-slate-300"
+                    }`}
+                  >
+                    <td className="font-poppins  text-sm">{i + 1}</td>
+                    <td className="font-poppins text-xs">
+                      {contact?.subject?.slice(0, 80)}...
+                    </td>
+                    <td className="font-poppins text-xs">
+                      {contact?.name?.slice(0, 5)}...
+                    </td>
+                    <td className="font-poppins text-xs">
+                      {contact?.email?.slice(0, 8)}...
+                    </td>
+                    <td className="font-poppins text-xs">{contact?.phone}</td>
+                    <td className="font-poppins text-xs">
+                      {contact?.comment?.slice(0, 10)}...
+                    </td>
+                    <td className="font-poppins text-xs">
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => openContactModal(contact?._id)}
+                          className=" p-1 bg-[#55e6a5] hover:bg-[#141c27] text-black hover:text-[#55e6a5] border border-[#55e6a5]"
+                        >
+                          view
+                        </button>
+                        <button
+                          onClick={() => handleDeleteAContact(contact?._id)}
+                          className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]"
+                        >
+                          delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
-        <div className="modal-box">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-lg mb-4 font-notoSans text-[#55e6a5]">
-            Contact Details
-          </h3>
-          <div>
-            <form className="flex flex-col gap-4">
-              <div className="flex justify-between">
-                <div className="form-control">
-                  <label
-                    htmlFor="contactName"
-                    className="text-white font-poppins mb-2"
-                  >
-                    Contact Name:
-                  </label>
-                  <input
-                    type="text"
-                    name="contactName"
-                    readOnly
-                    className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                    value="Shipan Mallik"
-                  />
-                </div>
 
-                <div className="form-control">
-                  <label
-                    htmlFor="contactEmail"
-                    className="text-white font-poppins mb-2"
-                  >
-                    Contact Email:
-                  </label>
-                  <input
-                    type="email"
-                    name="contactEmail"
-                    readOnly
-                    className="py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                    value="mshipan657@gmail.com"
-                  />
-                </div>
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="subject"
-                  className="text-white font-poppins mb-2"
-                >
-                  Subject:
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  readOnly
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="I have a query"
-                />
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="contactPhone"
-                  className="text-white font-poppins mb-2"
-                >
-                  Contact Phone:
-                </label>
-                <input
-                  type="text"
-                  name="contactPhone"
-                  readOnly
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="01622543390"
-                />
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="message"
-                  className="text-white font-poppins mb-2"
-                >
-                  Message:
-                </label>
-                <textarea
-                  name="message"
-                  cols="30"
-                  readOnly
-                  rows="5"
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi vel vitae et obcaecati molestiae laudantium esse quisquam quibusdam corporis. Quisquam."
-                ></textarea>
-              </div>
-            </form>
-          </div>
-        </div>
-      </dialog>
+      {selectedContactId && (
+        <ViewContactModal
+          isContactModalOpen={isContactModalOpen}
+          isContactModalClose={isContactModalClose}
+          contactId={selectedContactId}
+          onClose={closeContactModal}
+        />
+      )}
     </div>
   );
 };

@@ -12,6 +12,7 @@ const baseApi = createApi({
     "blog",
     "service",
     "contact",
+    "newsLetter",
   ],
   endpoints: () => ({}),
 });

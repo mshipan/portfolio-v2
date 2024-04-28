@@ -16,22 +16,25 @@ const Contact = () => {
     reset,
   } = useForm();
   const [sendEmail] = useSendEmailMutation();
+
+  const now = new Date();
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+      data.createdAt = now;
       const result = await sendEmail(data);
 
       // Show toast based on response
       if (result.data) {
         reset();
         setLoading(false);
-        toast.success("Message sent successfully.");
+        toast.success("Mail sent successfully.");
         setSentText(true);
         setTimeout(() => {
           setSentText(false);
         }, 1500);
       } else {
-        toast.error("Failed to send message.");
+        toast.error("Failed to send Mail.");
       }
     } catch (error) {
       setLoading(false);

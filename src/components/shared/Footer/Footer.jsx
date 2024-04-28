@@ -7,8 +7,60 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { useForm } from "react-hook-form";
+import { useAddANewsLetterMutation } from "../../../redux/features/api/newsLetter/newsLetterApi";
+import Swal from "sweetalert2";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import checkGif from "../../../assets/check.gif";
 
 const Footer = () => {
+  const [loading, setLoading] = useState(false);
+  const [sentText, setSentText] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [addANewsLetter] = useAddANewsLetterMutation();
+
+  const now = new Date();
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      data.createdAt = now;
+      const result = await addANewsLetter(data);
+
+      if (result.data) {
+        Swal.fire({
+          title: "Successfully Subscribed for Newsletter!",
+          text: "Press OK to continue",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        reset();
+        setLoading(false);
+        setSentText(true);
+        setTimeout(() => {
+          setSentText(false);
+        }, 1500);
+      } else {
+        Swal.fire({
+          title: `${result.error.data.message}!`,
+          html: `
+                <p style="font-size: 24px; margin-bottom: 5px; color: #55e6a5;">Please subscribe by a new one.</p>
+                <p style="font-size: 20px;">Press OK to continue</p>
+                `,
+          icon: "warning",
+          confirmButtonText: "OK",
+        });
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
   return (
     <div className="pt-20">
       <div className="flex flex-col items-center gap-6 footerBg py-16">
@@ -19,18 +71,41 @@ const Footer = () => {
           <h1 className="text-white text-5xl font-bold font-notoSans capitalize text-center md:text-left">
             subscribe for newsletter
           </h1>
-          <div className="w-[96%] md:w-full mx-auto mt-5 md:border md:border-[#55e6a5]">
-            <form className="flex flex-col md:flex-row items-center w-full gap-4 md:gap-0">
+          {errors.email && (
+            <p className="text-yellow-500 text-sm font-notoSans">
+              ** The Email for Newsletter Subscription is Required. **
+            </p>
+          )}
+          <div className="w-[96%] md:w-full mx-auto md:border md:border-[#55e6a5]">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col md:flex-row items-center w-full gap-4 md:gap-0"
+            >
               <div className="form-control w-full md:w-3/4 border border-[#55e6a5] md:border-none">
                 <input
                   type="email"
                   name="email"
+                  {...register("email", { required: true })}
                   placeholder="Enter Your Email"
                   className="py-3 pl-4 outline-none placeholder:text-white text-white bg-[#141c27]"
                 />
               </div>
               <Button
-                text="subscribe now"
+                text={
+                  loading ? (
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="loading loading-spinner loading-sm"></span>
+                      <span>Subscribing...</span>
+                    </div>
+                  ) : sentText ? (
+                    <div className="flex items-center justify-center gap-1">
+                      <img src={checkGif} alt="Sent GIF" className="w-5 h-5" />
+                      <span>Subscribed.</span>
+                    </div>
+                  ) : (
+                    "subscribe now"
+                  )
+                }
                 type="submit"
                 className="flex items-center gap-1 capitalize md:w-1/4"
               />
