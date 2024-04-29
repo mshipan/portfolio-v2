@@ -33,6 +33,20 @@ const blogApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["blog"],
     }),
+    addLikeToBlog: builder.mutation({
+      query: (id) => ({
+        url: `/blog/${id}/like`,
+        method: "POST",
+      }),
+      invalidatesTags: ["blog"],
+    }),
+    removeLikeFromBlog: builder.mutation({
+      query: (id) => ({
+        url: `/blog/${id}/like`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["blog"],
+    }),
   }),
 });
 
@@ -42,4 +56,6 @@ export const {
   useAddABlogMutation,
   useUpdateABlogMutation,
   useDeleteABlogMutation,
+  useAddLikeToBlogMutation,
+  useRemoveLikeFromBlogMutation,
 } = blogApi;
