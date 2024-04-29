@@ -11,6 +11,7 @@ import { useGetAllProjectsQuery } from "../../../redux/features/api/project/proj
 
 const Portfolio = () => {
   const { data: allProjects } = useGetAllProjectsQuery();
+
   return (
     <div
       id="projects"
@@ -63,11 +64,17 @@ const Portfolio = () => {
             }}
             className="mySwiper"
           >
-            {allProjects?.map((project) => (
-              <SwiperSlide key={project?._id}>
-                <ProjectCard project={project} />
-              </SwiperSlide>
-            ))}
+            {allProjects?.length > 3
+              ? allProjects?.slice(0, 4)?.map((project) => (
+                  <SwiperSlide key={project._id}>
+                    <ProjectCard project={project} />
+                  </SwiperSlide>
+                ))
+              : allProjects?.map((project) => (
+                  <SwiperSlide key={project._id}>
+                    <ProjectCard project={project} />
+                  </SwiperSlide>
+                ))}
           </Swiper>
         </div>
       </div>

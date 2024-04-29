@@ -31,7 +31,6 @@ const Navbar = () => {
       ) : (
         <Link
           to={item.link}
-          className={({ isActive }) => (isActive ? "text-[#55e6a5]" : "")}
           spy={true}
           smooth={true}
           offset={-70}
@@ -101,7 +100,7 @@ const Navbar = () => {
           id="my-drawer-4"
           type="checkbox"
           className="drawer-toggle"
-          checked={isDrawerOpen}
+          defaultChecked={isDrawerOpen}
         />
         <div className="drawer-content">
           {/* Page content here */

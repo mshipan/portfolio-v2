@@ -27,7 +27,7 @@ const Blog = () => {
       </div>
 
       <div className="mt-12 flex flex-col md:max-xl:flex-col md:max-xl:gap-5 xl:gap-5 md:flex-row items-center justify-between gap-5 md:gap-0">
-        {allBlogs?.map((blog) => (
+        {allBlogs?.slice(0, 3)?.map((blog) => (
           <BlogCard key={blog?._id} blog={blog} />
         ))}
       </div>

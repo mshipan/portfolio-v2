@@ -16,7 +16,7 @@ const BlogCard = ({ blog }) => {
         <img
           src={blog?.blogBanner}
           alt="Blog Image"
-          className="transition duration-300 ease-in-out hover:scale-110"
+          className="transition duration-300 ease-in-out hover:scale-110 h-56"
         />
       </div>
       <div className="relative bg-zinc-900 rounded-b-lg">

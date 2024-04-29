@@ -124,6 +124,22 @@ const UpdateAboutMe = () => {
 
           <div className="form-control">
             <label
+              htmlFor="experience"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Experience: <span className="text-sm">(in Years)</span>
+            </label>
+            <input
+              type="text"
+              name="experience"
+              defaultValue={aboutMe[0]?.experience}
+              {...register("experience")}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
               htmlFor="email"
               className="text-lg text-white font-notoSans mb-2"
             >
@@ -260,6 +276,38 @@ const UpdateAboutMe = () => {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="cvDriveLink"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              CV Drive Link:
+            </label>
+            <input
+              type="text"
+              name="cvDriveLink"
+              defaultValue={aboutMe[0]?.cvDriveLink}
+              {...register("cvDriveLink")}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="resumeDriveLink"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Resume Drive Link:
+            </label>
+            <input
+              type="text"
+              name="resumeDriveLink"
+              defaultValue={aboutMe[0]?.resumeDriveLink}
+              {...register("resumeDriveLink")}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
           </div>
         </div>
       </div>

@@ -5,11 +5,15 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useGetAboutMeQuery } from "../../../redux/features/api/aboutMe/aboutMeApi";
 
 const About = () => {
   // const PDF_FILE_URL = "http://localhost:5173/Resume_of_Shipan_Mallik.pdf";
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: allAboutMe } = useGetAboutMeQuery();
+  const aboutMe = allAboutMe?.[0];
 
   function closeModal() {
     setIsOpen(false);
@@ -42,7 +46,7 @@ const About = () => {
               <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-700 opacity-75"></div>
               <button
                 onClick={openModal}
-                className="relative inline-flex rounded-full h-20 w-20 bg-zinc-800 items-center justify-center"
+                className="relative inline-flex rounded-full h-20 w-20 bg-zinc-400 items-center justify-center"
               >
                 <BsFillPlayFill className="text-3xl" />
               </button>
@@ -61,7 +65,7 @@ const About = () => {
                       leaveTo="opacity-0 scale-95"
                     >
                       <Dialog.Panel className="w-full max-w-3xl transform bg-white text-left align-middle shadow-xl transition-all">
-                        <div className="">
+                        <div>
                           <button
                             type="button"
                             className="absolute -top-1 -right-2 bg-white p-2 rounded-full z-50"
@@ -71,7 +75,7 @@ const About = () => {
                           </button>
                           <iframe
                             className="w-full aspect-video"
-                            src="https://www.youtube.com/embed/pJQXGmMofro?si=LE5Jav2uUHxOfTh5"
+                            src={aboutMe?.watchTheVideo}
                           ></iframe>
                         </div>
                       </Dialog.Panel>
@@ -80,10 +84,7 @@ const About = () => {
                 </div>
               </Dialog>
             </Transition>
-            <Link
-              to="https://drive.google.com/file/d/1NrDqwMne4B0Rvxpw1z1kr3DwtPzg8wmS/view?usp=drive_link"
-              target="_blank"
-            >
+            <Link to={aboutMe?.resumeDriveLink} target="_blank">
               <Button
                 text="get resume"
                 className="capitalize flex items-center gap-2"
@@ -100,19 +101,14 @@ const About = () => {
                 I&apos;m shipan mallik
               </h1>
               <h1 className="font-poppins text-base md:text-2xl text-zinc-400">
-                Front-end Developer specializing in
+                {aboutMe?.role} specializing in
               </h1>
               <h1 className="font-poppins text-2xl text-zinc-400">
                 MERN Stack
               </h1>
             </div>
             <p className=" text-zinc-400 max-w-lg md:text-justify text-center">
-              As a talented React enthusiast with a computer science and
-              engineering degree, I possess a strong foundation to excel as a
-              front-end developer. With a passion for creating visually
-              captivating and interactive web applications, I am eager to
-              contribute, collaborate, and embark on an exciting journey as a
-              React front-end developer.
+              {aboutMe?.about}
             </p>
           </div>
         </div>

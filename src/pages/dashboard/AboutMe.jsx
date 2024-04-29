@@ -1,4 +1,4 @@
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaLink } from "react-icons/fa";
 import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import Button from "../../components/shared/Button";
 import { Link } from "react-router-dom";
@@ -91,6 +91,22 @@ const AboutMe = () => {
               name="mobile"
               readOnly
               value={aboutMe[0]?.mobile}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="experience"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Experience: <span className="text-sm">(in Years)</span>
+            </label>
+            <input
+              type="text"
+              name="experience"
+              readOnly
+              value={aboutMe[0]?.experience}
               className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
             />
           </div>
@@ -233,6 +249,40 @@ const AboutMe = () => {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="cvDriveLink"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              CV Drive Link:
+            </label>
+            <input
+              type="text"
+              name="cvDriveLink"
+              readOnly
+              placeholder="eg. https://drive.google.com/file..."
+              value={aboutMe[0]?.cvDriveLink}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
+          </div>
+
+          <div className="form-control">
+            <label
+              htmlFor="resumeDriveLink"
+              className="text-lg text-white font-notoSans mb-2"
+            >
+              Resume Drive Link:
+            </label>
+            <input
+              type="text"
+              name="resumeDriveLink"
+              readOnly
+              placeholder="eg. https://drive.google.com/file..."
+              value={aboutMe[0]?.resumeDriveLink}
+              className="w-full md:w-1/2 md:max-xl:w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
+            />
           </div>
         </form>
       </div>

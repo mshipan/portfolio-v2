@@ -13,19 +13,26 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import checkGif from "../../../assets/check.gif";
+import { useGetAboutMeQuery } from "../../../redux/features/api/aboutMe/aboutMeApi";
 
 const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [sentText, setSentText] = useState(false);
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
   const [addANewsLetter] = useAddANewsLetterMutation();
+  const { data: allAboutMe } = useGetAboutMeQuery();
+  const aboutMe = allAboutMe?.[0];
 
   const now = new Date();
+  const currentYear = new Date().getFullYear();
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -119,7 +126,7 @@ const Footer = () => {
             <FaPhoneAlt />
           </div>
           <h1 className="font-poppins text-lg md:text-2xl text-white">
-            +88 01622 543390
+            {aboutMe?.mobile}
           </h1>
         </div>
         <div className="flex items-center gap-4">
@@ -127,21 +134,21 @@ const Footer = () => {
             <IoIosMail />
           </div>
           <h1 className="font-poppins text-lg md:text-2xl text-white">
-            shipanmallik95@gmail.com
+            {aboutMe?.email}
           </h1>
         </div>
         <div className="flex items-center gap-4">
-          <Link to="https://github.com/mshipan">
+          <Link to={aboutMe?.github}>
             <div className="p-5 border border-zinc-800 hover:border-white rounded-full text-white hover:text-[#02050a] hover:bg-white transition-all ease-in-out duration-500">
               <FaGithub />
             </div>
           </Link>
-          <Link to="https://www.facebook.com/mallik.shipan">
+          <Link to={aboutMe?.facebook}>
             <div className="p-5 border border-zinc-800 hover:border-white rounded-full text-white hover:text-[#02050a] hover:bg-white transition-all ease-in-out duration-500">
               <FaFacebookF />
             </div>
           </Link>
-          <Link to="https://www.linkedin.com/in/shipan-mallik/">
+          <Link to={aboutMe?.linkedin}>
             <div className="p-5 border border-zinc-800 hover:border-white rounded-full text-white hover:text-[#02050a] hover:bg-white transition-all ease-in-out duration-500">
               <FaLinkedin />
             </div>
@@ -152,9 +159,9 @@ const Footer = () => {
         <div className="py-2">
           <div className="md:w-3/5 w-full mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-4 md:gap-0">
             <p className="text-sm text-zinc-500 font-poppins">
-              &copy; 2023 All Right Reserved by
+              &copy; {currentYear} All Right Reserved by
               <Link to="/">
-                <span className="text-white"> Shipan Mallik</span>
+                <span className="text-white capitalize"> {aboutMe?.name}</span>
               </Link>
             </p>
             <div>

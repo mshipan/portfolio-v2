@@ -9,6 +9,7 @@ import { TypeAnimation } from "react-type-animation";
 import { Dialog, Transition } from "@headlessui/react";
 import { FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useGetAboutMeQuery } from "../../../redux/features/api/aboutMe/aboutMeApi";
 
 const Banner = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,9 @@ const Banner = () => {
       )
       .join("");
   }, []);
+
+  const { data: allAboutMe } = useGetAboutMeQuery();
+  const aboutMe = allAboutMe?.[0];
 
   // const downloadFileAtUrl = (url) => {
   //   const fileName = url.split("/").pop();
@@ -80,18 +84,10 @@ const Banner = () => {
             </h1>
           </div>
           <p className="text-zinc-300 max-w-md text-sm md:max-xl:text-center">
-            I&apos;m a passionate Web Developer with a knack for creating
-            captivating digital experiences. My skills include HTML5, CSS3,
-            JavaScript, React, Redux, and UI libraries like Tailwind CSS and
-            Bootstrap. On the backend, I excel in Node.js, Express.js, MongoDB,
-            and Firebase. Let&apos;s craft user-friendly interfaces that engage
-            and delight users!
+            {aboutMe?.about}
           </p>
           <div className="flex flex-col sm:max-xl:flex-row md:flex-row items-start md:items-center md:max-xl:justify-center gap-2">
-            <Link
-              to="https://drive.google.com/file/d/1HoOPu5q0_Ng157TlSFzKO8oEjXfI39yV/view?usp=drive_link"
-              target="_blank"
-            >
+            <Link to={aboutMe?.cvDriveLink} target="_blank">
               <Button
                 text="download cv"
                 className="capitalize flex items-center gap-2"
@@ -123,7 +119,7 @@ const Banner = () => {
                       leaveTo="opacity-0 scale-95"
                     >
                       <Dialog.Panel className="w-full max-w-3xl transform bg-white text-left align-middle shadow-xl transition-all">
-                        <div className="">
+                        <div>
                           <button
                             type="button"
                             className="absolute -top-1 -right-2 bg-white p-2 rounded-full z-50"
@@ -133,7 +129,7 @@ const Banner = () => {
                           </button>
                           <iframe
                             className="w-full aspect-video"
-                            src="https://www.youtube.com/embed/pJQXGmMofro?si=LE5Jav2uUHxOfTh5"
+                            src={aboutMe?.watchTheVideo}
                           ></iframe>
                         </div>
                       </Dialog.Panel>

@@ -4,6 +4,8 @@ import {
   useGetAllNewsLettersQuery,
 } from "../../redux/features/api/newsLetter/newsLetterApi";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import Button from "../../components/shared/Button";
 
 const NewsLetters = () => {
   const { data: allNewsLetters } = useGetAllNewsLettersQuery();
@@ -33,6 +35,14 @@ const NewsLetters = () => {
       }
     });
   };
+
+  const handleCopyEmails = () => {
+    const emails = allNewsLetters
+      .map((newsLetter) => newsLetter.email)
+      .join(", ");
+    navigator.clipboard.writeText(emails);
+    toast.success("All emails copied to clipboard.");
+  };
   return (
     <div className="h-screen md:h-screen">
       <div className="flex flex-row gap-3 md:gap-0 md:items-center mb-5 justify-between w-full md:w-1/2 md:max-xl:w-full">
@@ -41,6 +51,11 @@ const NewsLetters = () => {
             Newsletter Emails
           </h1>
         </div>
+        <Button
+          onClick={handleCopyEmails}
+          text="Copy All Emails"
+          className="border border-[#55e6a5] w-1/4 justify-center"
+        />
       </div>
       <div className="w-full md:w-1/2 md:max-xl:w-full">
         <div>

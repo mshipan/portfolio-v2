@@ -45,12 +45,12 @@ const UpdateEducationCardModal = ({ isModalOpen, closeModal, education }) => {
   };
   return (
     <dialog open={isModalOpen} className="modal modal-middle sm:modal-middle">
-      <div className="modal-box">
+      <div className="modal-box bg-[#141c27]">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
           <button
             onClick={closeModal}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white bg-[#243144]"
           >
             ✕
           </button>
@@ -75,7 +75,7 @@ const UpdateEducationCardModal = ({ isModalOpen, closeModal, education }) => {
                 defaultValue={title}
                 {...register("title")}
                 placeholder="Your Education Title"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none text-zinc-400"
               />
             </div>
 
@@ -91,7 +91,7 @@ const UpdateEducationCardModal = ({ isModalOpen, closeModal, education }) => {
                 max="100"
                 min="0"
                 placeholder="Star Year"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none text-zinc-400"
               />
             </div>
 
@@ -107,7 +107,7 @@ const UpdateEducationCardModal = ({ isModalOpen, closeModal, education }) => {
                 max="100"
                 min="0"
                 placeholder="End Year"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none text-zinc-400"
               />
             </div>
 
@@ -123,7 +123,7 @@ const UpdateEducationCardModal = ({ isModalOpen, closeModal, education }) => {
                 cols="30"
                 rows="5"
                 placeholder="Description"
-                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none"
+                className="border border-[#55e6a5] p-1 bg-[#141c27] placeholder-zinc-300 outline-none text-zinc-400"
               ></textarea>
             </div>
             <div>

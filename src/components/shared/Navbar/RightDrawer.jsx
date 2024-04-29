@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSendEmailMutation } from "../../../redux/features/api/contact/contactApi";
 import toast from "react-hot-toast";
 import checkGif from "../../../assets/check.gif";
+import { useGetAboutMeQuery } from "../../../redux/features/api/aboutMe/aboutMeApi";
 
 const RightDrawer = () => {
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,8 @@ const RightDrawer = () => {
     reset,
   } = useForm();
   const [sendEmail] = useSendEmailMutation();
+  const { data: allAboutMe } = useGetAboutMeQuery();
+  const aboutMe = allAboutMe?.[0];
 
   const now = new Date();
   const onSubmit = async (data) => {
@@ -56,13 +59,7 @@ const RightDrawer = () => {
       </div>
       <div className="p-4 mt-7 mb-8">
         <h1 className="font-notoSans uppercase text-lg text-white">About Me</h1>
-        <p className="mt-3 text-sm text-zinc-400">
-          As a talented React enthusiast with a computer science and engineering
-          degree, I possess a strong foundation to excel as a front-end
-          developer. With a passion for creating visually captivating and
-          interactive web applications, I am eager to contribute, collaborate,
-          and embark on an exciting journey as a React front-end developer.
-        </p>
+        <p className="mt-3 text-sm text-zinc-400">{aboutMe?.about}</p>
       </div>
       <div className="p-4">
         <h1 className="font-notoSans uppercase text-lg text-white mb-6">

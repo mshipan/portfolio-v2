@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useSendEmailMutation } from "../redux/features/api/contact/contactApi";
 import toast from "react-hot-toast";
 import checkGif from "../assets/check.gif";
+import { useGetAboutMeQuery } from "../redux/features/api/aboutMe/aboutMeApi";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,9 @@ const Contact = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const { data: allAboutMe } = useGetAboutMeQuery();
+  const aboutMe = allAboutMe?.[0];
+  console.log(aboutMe);
   const [sendEmail] = useSendEmailMutation();
 
   const now = new Date();
@@ -47,7 +51,7 @@ const Contact = () => {
       <div className="md:mt-32 mt-20 mb-20 md:w-3/5 w-full text-center md:text-left mx-auto">
         <div className="w-[96%] md:max-xl:w-full md:w-full mx-auto">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.453151702253!2d90.36443177618085!3d23.802479978634935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d0eefa3e4f%3A0x8678e76c333fa108!2sKathaltola%20Dairy%20Farm!5e0!3m2!1sen!2sbd!4v1700506284579!5m2!1sen!2sbd"
+            src={aboutMe?.maplink}
             className="border-none w-full h-[20rem] md:max-xl:h-80 md:h-[35rem]"
             allowfullscreen=""
             loading="lazy"
@@ -58,24 +62,20 @@ const Contact = () => {
           <div className="py-20 px-10 bg-[#141c27] md:max-xl:w-full md:w-1/3 xl:max-2xl:w-full flex flex-col gap-5">
             <div className="bg-[#1d2837] hover:bg-[#141c27] border border-[#141c27] hover:border-[#55e6a5] transition-all ease-in duration-300 flex flex-col gap-4 px-5 py-4">
               <h1 className="text-white font-notoSans capitalize">phone:</h1>
-              <p className="text-zinc-500 font-poppins">01622543390</p>
+              <p className="text-zinc-500 font-poppins">{aboutMe?.mobile}</p>
             </div>
             <div className="bg-[#1d2837] hover:bg-[#141c27] border border-[#141c27] hover:border-[#55e6a5] transition-all ease-in duration-300 flex flex-col gap-4 px-5 py-4">
               <h1 className="text-white font-notoSans capitalize">Email:</h1>
-              <p className="text-zinc-500 font-poppins">
-                shipanmallik95@gmail.com
-              </p>
+              <p className="text-zinc-500 font-poppins">{aboutMe?.email}</p>
             </div>
             <div className="bg-[#1d2837] hover:bg-[#141c27] border border-[#141c27] hover:border-[#55e6a5] transition-all ease-in duration-300 flex flex-col gap-4 px-5 py-4">
               <h1 className="text-white font-notoSans capitalize">website:</h1>
-              <p className="text-zinc-500 font-poppins">
-                shipanmallik.example.com
-              </p>
+              <p className="text-zinc-500 font-poppins">{aboutMe?.website}</p>
             </div>
             <div className="bg-[#1d2837] hover:bg-[#141c27] border border-[#141c27] hover:border-[#55e6a5] transition-all ease-in duration-300 flex flex-col gap-4 px-5 py-4">
               <h1 className="text-white font-notoSans capitalize">address:</h1>
               <p className="text-zinc-500 font-poppins capitalize">
-                kathaltola panir pump, east monipur, mirpur-2, dhaka-1216
+                {aboutMe?.address}
               </p>
             </div>
           </div>

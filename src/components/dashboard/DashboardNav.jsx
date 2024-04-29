@@ -22,7 +22,9 @@ const DashboardNav = () => {
   const userMenuDropdown = (
     <>
       <li>
-        <button onClick={handleLogout} className="text-white">Log Out</button>
+        <button onClick={handleLogout} className="text-white">
+          Log Out
+        </button>
       </li>
     </>
   );
@@ -31,7 +33,7 @@ const DashboardNav = () => {
       <div onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}>
         <PiUserCircleLight size={40} className="cursor-pointer text-gray-300" />
       </div>
-      <div className="">
+      <div>
         <ul
           className={`absolute right-16 top-5 origin-right transition-all ease-in-out duration-500 ${
             isUserDropdownOpen ? "scal-1" : "scale-0"

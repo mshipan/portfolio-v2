@@ -8,8 +8,24 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useEffect, useState } from "react";
 import { useGetAboutMeQuery } from "../../redux/features/api/aboutMe/aboutMeApi";
+import { useGetAllProjectsQuery } from "../../redux/features/api/project/projectApi";
+import { useGetAllBlogsQuery } from "../../redux/features/api/blog/blogApi";
+import {
+  useDeleteAContactMutation,
+  useGetAllContactsQuery,
+  useUpdateIsNewStatusOnContactMutation,
+} from "../../redux/features/api/contact/contactApi";
+import {
+  useDeleteANewsLetterMutation,
+  useGetAllNewsLettersQuery,
+} from "../../redux/features/api/newsLetter/newsLetterApi";
+import Swal from "sweetalert2";
+import ViewContactModal from "../../components/dashboard/ViewContactModal";
 
 const MyDashboard = () => {
+  const [selectedContactId, setSelectedContactId] = useState(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isContactModalClose, setIsContactModalClose] = useState(false);
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
@@ -23,6 +39,13 @@ const MyDashboard = () => {
   }, []);
 
   const { data: aboutMe } = useGetAboutMeQuery();
+  const { data: allProjects } = useGetAllProjectsQuery();
+  const { data: allBlogs } = useGetAllBlogsQuery();
+  const { data: allContacts } = useGetAllContactsQuery();
+  const { data: allNewsLetters } = useGetAllNewsLettersQuery();
+  const [deleteANewsLetter] = useDeleteANewsLetterMutation();
+  const [deleteAContact] = useDeleteAContactMutation();
+  const [updateIsNewStatus] = useUpdateIsNewStatusOnContactMutation();
 
   const tileClassName = ({ date }) => {
     // Check if the day is Friday (5 is the index for Friday)
@@ -38,6 +61,75 @@ const MyDashboard = () => {
       return "sunday-tile";
     }
     return null;
+  };
+
+  const handleDeleteANewsLetter = async (_id) => {
+    Swal.fire({
+      title: "Are you sure to Delete this?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await deleteANewsLetter({ id: _id });
+          if (result.data.deletedCount > 0) {
+            Swal.fire(
+              "Deleted!",
+              "This newsletter email has been deleted.",
+              "success"
+            );
+          }
+        } catch (error) {
+          console.error("error deleting newsletter email", error);
+        }
+      }
+    });
+  };
+
+  const markContactAsViewed = async (contactId) => {
+    try {
+      await updateIsNewStatus({ id: contactId, isNew: false });
+    } catch (error) {
+      throw new Error("Failed to mark contact as viewed");
+    }
+  };
+
+  const openContactModal = async (contactId) => {
+    setIsContactModalOpen(true);
+    setSelectedContactId(contactId);
+    try {
+      await markContactAsViewed(contactId);
+    } catch (error) {
+      console.error("Error marking contact as viewed:", error);
+    }
+  };
+  const closeContactModal = () => {
+    setIsContactModalClose(true);
+    setSelectedContactId(null);
+  };
+  const handleDeleteAContact = async (_id) => {
+    Swal.fire({
+      title: "Are you sure to Delete this?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await deleteAContact({ id: _id });
+          if (result.data.deletedCount > 0) {
+            Swal.fire("Deleted!", "This contact has been deleted.", "success");
+          }
+        } catch (error) {
+          console.error("error deleting contact", error);
+        }
+      }
+    });
   };
   return (
     <div className="h-auto md:h-screen">
@@ -63,9 +155,11 @@ const MyDashboard = () => {
                   <h1 className="font-poppins text-lg text-white uppercase leading-3">
                     Projects
                   </h1>
-                  <p className="font-notoSans text-4xl text-[#55e6a5]">10</p>
+                  <p className="font-notoSans text-4xl text-[#55e6a5]">
+                    {allProjects?.length}
+                  </p>
                   <p className="font-notoSans text-slate-400 text-xs">
-                    Last: <span>Chemistry Corner 1</span>
+                    Last: <span>{allProjects?.[0].projectTitle}</span>
                   </p>
                 </div>
                 <GoProject size={50} className="opacity-30" />
@@ -86,9 +180,11 @@ const MyDashboard = () => {
                   <h1 className="font-poppins text-lg text-white uppercase leading-3">
                     Blogs
                   </h1>
-                  <p className="font-notoSans text-4xl text-[#55e6a5]">5</p>
+                  <p className="font-notoSans text-4xl text-[#55e6a5]">
+                    {allBlogs?.length}
+                  </p>
                   <p className="font-notoSans text-slate-400 text-xs">
-                    Last: <span>Lorem ipsum dolor sit amet.</span>
+                    Last: <span>{allBlogs?.[0].blogTitle}</span>
                   </p>
                 </div>
                 <RiPagesLine size={50} className="opacity-30" />
@@ -109,9 +205,11 @@ const MyDashboard = () => {
                   <h1 className="font-poppins text-lg text-white uppercase leading-3">
                     Contacts
                   </h1>
-                  <p className="font-notoSans text-4xl text-[#55e6a5]">15</p>
+                  <p className="font-notoSans text-4xl text-[#55e6a5]">
+                    {allContacts?.length}
+                  </p>
                   <p className="font-notoSans text-slate-400 text-xs">
-                    Last: <span>Lorem ipsum dolor sit amet.</span>
+                    Last: <span>{allContacts?.[0].name}</span>
                   </p>
                 </div>
                 <IoIosContact size={50} className="opacity-30" />
@@ -132,9 +230,11 @@ const MyDashboard = () => {
                   <h1 className="font-poppins text-lg text-white uppercase leading-3">
                     Newsletters
                   </h1>
-                  <p className="font-notoSans text-4xl text-[#55e6a5]">20</p>
+                  <p className="font-notoSans text-4xl text-[#55e6a5]">
+                    {allNewsLetters?.length}
+                  </p>
                   <p className="font-notoSans text-slate-400 text-xs">
-                    Last: <span>Lorem ipsum dolor sit amet.</span>
+                    Last: <span>{allNewsLetters?.[0].email}</span>
                   </p>
                 </div>
                 <FaRegNewspaper size={50} className="opacity-30" />
@@ -165,19 +265,31 @@ const MyDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border border-[#55e6a5]">
-                    <td className="font-poppins text-slate-400 text-sm">1</td>
+                  {allNewsLetters?.slice(0, 4)?.map((newsLetter, i) => (
+                    <tr
+                      key={newsLetter?._id}
+                      className="border border-[#55e6a5]"
+                    >
+                      <td className="font-poppins text-slate-400 text-sm">
+                        {i + 1}
+                      </td>
 
-                    <td className="font-poppins text-slate-400 text-xs">
-                      mshipan657@gmail.com
-                    </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        {newsLetter?.email}
+                      </td>
 
-                    <td className="font-poppins text-slate-400 text-xs">
-                      <button className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]">
-                        delete
-                      </button>
-                    </td>
-                  </tr>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        <button
+                          onClick={() =>
+                            handleDeleteANewsLetter(newsLetter?._id)
+                          }
+                          className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]"
+                        >
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -198,142 +310,58 @@ const MyDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border border-[#55e6a5]">
-                    <td className="font-poppins text-slate-400 text-sm">1</td>
-                    <td className="font-poppins text-slate-400 text-xs">
-                      I have a query...
-                    </td>
-                    <td className="font-poppins text-slate-400 text-xs">
-                      Shipan...
-                    </td>
-                    <td className="font-poppins text-slate-400 text-xs">
-                      mshipan65...
-                    </td>
-                    <td className="font-poppins text-slate-400">01622543390</td>
-                    <td className="font-poppins text-slate-400 text-xs">
-                      Lorem ipsum...
-                    </td>
-                    <td className="font-poppins text-slate-400 text-xs">
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() =>
-                            document.getElementById("my_modal_5").showModal()
-                          }
-                          className=" p-1 bg-[#55e6a5] hover:bg-[#141c27] text-black hover:text-[#55e6a5] border border-[#55e6a5]"
-                        >
-                          view
-                        </button>
-                        <button className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]">
-                          delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  {allContacts?.slice(0, 5)?.map((contact, i) => (
+                    <tr key={contact?._id} className="border border-[#55e6a5]">
+                      <td className="font-poppins text-slate-400 text-sm">
+                        {i + 1}
+                      </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        {contact?.subject?.slice(0, 40)}...
+                      </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        {contact?.name?.slice(0, 5)}...
+                      </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        {contact?.email?.slice(0, 7)}...
+                      </td>
+                      <td className="font-poppins text-slate-400">
+                        {contact?.phone}
+                      </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        {contact?.email?.slice(0, 40)}...
+                      </td>
+                      <td className="font-poppins text-slate-400 text-xs">
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => openContactModal(contact?._id)}
+                            className=" p-1 bg-[#55e6a5] hover:bg-[#141c27] text-black hover:text-[#55e6a5] border border-[#55e6a5]"
+                          >
+                            view
+                          </button>
+                          <button
+                            onClick={() => handleDeleteAContact(contact?._id)}
+                            className=" p-1 bg-[#141c27] hover:bg-[#55e6a5] text-[#55e6a5] hover:text-black border border-[#55e6a5]"
+                          >
+                            delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-      <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
-        <div className="modal-box bg-[#141c27]">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white bg-gray-600">
-              ✕
-            </button>
-          </form>
-          <h3 className="font-bold text-lg mb-4 font-notoSans text-[#55e6a5]">
-            Contact Details
-          </h3>
-          <div>
-            <form className="flex flex-col gap-4">
-              <div className="flex justify-between">
-                <div className="form-control">
-                  <label
-                    htmlFor="contactName"
-                    className="text-white font-poppins mb-2"
-                  >
-                    Contact Name:
-                  </label>
-                  <input
-                    type="text"
-                    name="contactName"
-                    readOnly
-                    className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                    value="Shipan Mallik"
-                  />
-                </div>
-
-                <div className="form-control">
-                  <label
-                    htmlFor="contactEmail"
-                    className="text-white font-poppins mb-2"
-                  >
-                    Contact Email:
-                  </label>
-                  <input
-                    type="email"
-                    name="contactEmail"
-                    readOnly
-                    className="py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                    value="mshipan657@gmail.com"
-                  />
-                </div>
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="subject"
-                  className="text-white font-poppins mb-2"
-                >
-                  Subject:
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  readOnly
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="I have a query"
-                />
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="contactPhone"
-                  className="text-white font-poppins mb-2"
-                >
-                  Contact Phone:
-                </label>
-                <input
-                  type="text"
-                  name="contactPhone"
-                  readOnly
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="01622543390"
-                />
-              </div>
-
-              <div className="form-control">
-                <label
-                  htmlFor="message"
-                  className="text-white font-poppins mb-2"
-                >
-                  Message:
-                </label>
-                <textarea
-                  name="message"
-                  cols="30"
-                  readOnly
-                  rows="5"
-                  className="w-full py-1 px-2 outline-none border border-[#55e6a5] bg-[#141c27] placeholder:text-white text-slate-400 font-poppins"
-                  value="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi vel vitae et obcaecati molestiae laudantium esse quisquam quibusdam corporis. Quisquam."
-                ></textarea>
-              </div>
-            </form>
-          </div>
-        </div>
-      </dialog>
+      {selectedContactId && (
+        <ViewContactModal
+          isContactModalOpen={isContactModalOpen}
+          isContactModalClose={isContactModalClose}
+          contactId={selectedContactId}
+          onClose={closeContactModal}
+        />
+      )}
     </div>
   );
 };
