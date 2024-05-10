@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import blogImg from "../../assets/blog1.jpg";
 import { SlCalender } from "react-icons/sl";
 
@@ -13,12 +14,14 @@ const MiniBlogCard = ({ blog }) => {
         <img src={blog?.blogBanner} alt="Blog Image" className="w-20" />
       </div>
       <div>
-        <h1 className="text-white text-lg font-notoSans capitalize text-left">
-          {blog?.blogTitle}
-        </h1>
+        <Link to={`/blog/${blog?._id}`}>
+          <h1 className="text-white text-base font-notoSans capitalize text-left hover:underline">
+            {blog?.blogTitle?.slice(0, 15)}...
+          </h1>
+        </Link>
         <div className="text-zinc-400 flex items-start md:items-center gap-2">
           <SlCalender />
-          <p>{formatDate(blog?.createdAt)}</p>
+          <p className="text-xs">{formatDate(blog?.createdAt)}</p>
         </div>
       </div>
     </div>

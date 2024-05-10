@@ -10,6 +10,7 @@ const BlogCard = ({ blog }) => {
     const options = { day: "2-digit", month: "short", year: "numeric" };
     return dateObj.toLocaleDateString("en-GB", options);
   };
+  console.log(blog?.comments?.length);
   return (
     <div className="w-80 xl:max-2xl:w-80">
       <div className="overflow-hidden bg-cover bg-no-repeat rounded-t-lg">
@@ -30,7 +31,7 @@ const BlogCard = ({ blog }) => {
         <div className="pt-10 px-4">
           <Link to={`/blog/${blog?._id}`}>
             <h1 className="text-white text-xl font-semibold font-notoSans hover:underline">
-              {blog?.blogTitle}
+              {blog?.blogTitle?.slice(0, 30)}...
             </h1>
           </Link>
           <p className="text-zinc-400 font-poppins text-sm py-3 text-justify">
@@ -51,11 +52,13 @@ const BlogCard = ({ blog }) => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <AiFillLike className="text-[#55e6a5]" />
-                <p className="text-white">0</p>
+                <p className="text-white">{blog?.likes ? blog?.likes : "0"}</p>
               </div>
               <div className="flex items-center gap-1">
                 <FaComments className="text-[#55e6a5]" />
-                <p className="text-white">0</p>
+                <p className="text-white">
+                  {blog?.comments?.length ? blog?.comments?.length : "0"}
+                </p>
               </div>
             </div>
           </div>
